@@ -22,6 +22,18 @@ if [[ "init" == "$COMMAND" ]]; then
     ${DOCKER_START} sphinx-quickstart
 elif [[ "make" == "$COMMAND" ]]; then
     ${DOCKER_START} make html
+elif [[ "release" == "$COMMAND" ]]; then
+    ${DOCKER_START} make html
+
+    if [[ -d "$CURRENT_DIR/docs/build/html" ]]; then
+        if [[ -d "$CURRENT_DIR/docs/docs" ]]; then
+            rm -rf ${CURRENT_DIR}/docs/docs
+            echo "Cleaned the output directory."
+        fi
+
+        cp -r "$CURRENT_DIR/docs/build/html" "$CURRENT_DIR/docs/docs"
+        echo "Copied the /build/html directory to /docs"
+    fi
 elif [[ "bash" == "$COMMAND" ]]; then
     ${DOCKER_START} bash
 else
