@@ -1,0 +1,9 @@
+a.icon-home:before {
+    display: inline;
+    content: '';
+}
+
+.wy-side-nav-search > a.icon img.logo {
+    margin-top: 0 !important;
+    max-width: 160px;
+}
