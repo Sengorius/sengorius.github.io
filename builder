@@ -17,13 +17,23 @@ fi
 SPHINX_IMAGE=sengorius/sphinx:3
 DOCKER_START="docker run --rm -u $(id -u):$(id -g) -v $CURRENT_DIR/docs:/var/documentation -it $SPHINX_IMAGE"
 
+function fix_static_links() {
+    if [[ -d "$CURRENT_DIR/docs/build/html" ]]; then
+        mv ${CURRENT_DIR}/docs/build/html/_static ${CURRENT_DIR}/docs/build/html/static
+        find ${CURRENT_DIR}/docs/build/html -type f -exec sed -i 's/_static/static/g' {} \;
+        echo "Renamed directory _static to static and fixed links within all files."
+    fi
+}
+
 # and run it with the given command
 if [[ "init" == "$COMMAND" ]]; then
     ${DOCKER_START} sphinx-quickstart
 elif [[ "make" == "$COMMAND" ]]; then
     ${DOCKER_START} make html
+    fix_static_links
 elif [[ "release" == "$COMMAND" ]]; then
     ${DOCKER_START} make html
+    fix_static_links
 
     if [[ -d "$CURRENT_DIR/docs/build/html" ]]; then
         if [[ -d "$CURRENT_DIR/docs/docs" ]]; then
