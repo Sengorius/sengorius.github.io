@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E-Mail Catching &mdash;  1.0.0 documentation</title>
+      <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../static/additional.css" type="text/css" />
+    <link rel="shortcut icon" href="../../static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../static/documentation_options.js"></script>
+        <script src="../../static/jquery.js"></script>
+        <script src="../../static/underscore.js"></script>
+        <script src="../../static/doctools.js"></script>
+    <script src="../../static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Docker-Proxy-Stack Upgrade instructions" href="upgrade-v2.html" />
+    <link rel="prev" title="DockerExec" href="docker-exec.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> 
+            <img src="../../static/cogs_v3_256.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Docker-Proxy-Stack</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installation &amp; Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker-exec.html">DockerExec</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">E-Mail Catching</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#symfony">Symfony</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wordpress">WordPress</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="upgrade-v2.html">Docker-Proxy-Stack Upgrade instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#what-is-the-docker-proxy-stack">What is the Docker-Proxy-Stack?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#how-does-the-proxy-stack-work">How does the Proxy-Stack work?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#how-to-add-projects-to-the-docker-proxy-network">How to add Projects to the Docker Proxy Network</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../simple-rest/index.html">Simple REST Bundle</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html"></a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Docker-Proxy-Stack</a> &raquo;</li>
+      <li>E-Mail Catching</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="e-mail-catching">
+<span id="docs-docker-proxy-mailcatching"></span><h1>E-Mail Catching<a class="headerlink" href="#e-mail-catching" title="Permalink to this headline"></a></h1>
+<p>This service was created to catch e-mails on the SMTP ports from any local source and display them in a simple viewer
+within a browser. You can read more about it <a class="reference external" href="https://github.com/Sengorius/proxy-mailcatcher">here</a>.</p>
+<p>To make this service part of the Proxy-Stack, use the <code class="docutils literal notranslate"><span class="pre">DockerExec</span> <span class="pre">spawn</span> <span class="pre">mailcatcher</span></code> command and follow the
+instructions. Don’t forget to restart the Proxy-Network, if done.</p>
+<p>Then configure the service in your projects. Current use-cases include mails sent by <strong>Symfony</strong> and <strong>WordPress</strong>.</p>
+<section id="symfony">
+<h2>Symfony<a class="headerlink" href="#symfony" title="Permalink to this headline"></a></h2>
+<p>In your projects <code class="docutils literal notranslate"><span class="pre">.env</span></code> file set <code class="docutils literal notranslate"><span class="pre">MAILER_DSN=smtp://mailcatcher:25</span></code>. That’s it.</p>
+</section>
+<section id="wordpress">
+<h2>WordPress<a class="headerlink" href="#wordpress" title="Permalink to this headline"></a></h2>
+<p>Two options:</p>
+<ol class="arabic">
+<li><p>Install the Plugin <strong>WP Mail SMTP</strong>, use the option “Other SMTP” and set the variable “SMTP HOST” to <code class="docutils literal notranslate"><span class="pre">proxy-smtp</span></code>
+and “SMTP Port” to <code class="docutils literal notranslate"><span class="pre">25</span></code>. Then deactivate “Auto TLS” and “Authentication”.</p></li>
+<li><p>Create your own plugin with this code snippet:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="sd">/**</span>
+<span class="sd"> * Proxy SMTP Adapter</span>
+<span class="sd"> *</span>
+<span class="sd"> * @package nginx-proxy</span>
+<span class="sd"> * @license GPLv3</span>
+<span class="sd"> *</span>
+<span class="sd"> * @wordpress-plugin</span>
+<span class="sd"> * Plugin Name: Proxy SMTP Adapter</span>
+<span class="sd"> * Description: Configure WordPress to send emails to the Mailcatcher available at the host name &quot;proxy-smtp&quot;</span>
+<span class="sd"> * Version: 1.0.0</span>
+<span class="sd"> * Text Domain: nginx-proxy</span>
+<span class="sd"> * License: GPLv3</span>
+<span class="sd"> * License URI: http://www.gnu.org/licenses/gpl-3.0.txt</span>
+<span class="sd"> */</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * Configure WordPress to send emails to the Mailcatcher available at the host name &quot;proxy-smtp&quot;.</span>
+<span class="sd"> *</span>
+<span class="sd"> * @param PHPMailer $phpmailer The PHPMailer instance.</span>
+<span class="sd"> */</span>
+<span class="k">function</span> <span class="nf">proxy_smtp_config</span><span class="p">(</span> <span class="nv">$phpmailer</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$phpmailer</span><span class="o">-&gt;</span><span class="na">isSMTP</span><span class="p">();</span>
+    <span class="nv">$phpmailer</span><span class="o">-&gt;</span><span class="na">Host</span>     <span class="o">=</span> <span class="s1">&#39;proxy-smtp&#39;</span><span class="p">;</span>
+    <span class="nv">$phpmailer</span><span class="o">-&gt;</span><span class="na">SMTPAuth</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+    <span class="nv">$phpmailer</span><span class="o">-&gt;</span><span class="na">Port</span>     <span class="o">=</span> <span class="mi">25</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">add_action</span><span class="p">(</span> <span class="s1">&#39;phpmailer_init&#39;</span><span class="p">,</span> <span class="s1">&#39;proxy_smtp_config&#39;</span> <span class="p">);</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="docker-exec.html" class="btn btn-neutral float-left" title="DockerExec" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="upgrade-v2.html" class="btn btn-neutral float-right" title="Docker-Proxy-Stack Upgrade instructions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Sengorius.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Docker-Proxy-Stack &mdash;  1.0.0 documentation</title>
+      <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../static/additional.css" type="text/css" />
+    <link rel="shortcut icon" href="../../static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../static/documentation_options.js"></script>
+        <script src="../../static/jquery.js"></script>
+        <script src="../../static/underscore.js"></script>
+        <script src="../../static/doctools.js"></script>
+    <script src="../../static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Installation &amp; Update" href="install.html" />
+    <link rel="prev" title="Skript-Manufaktur Documentation" href="../../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> 
+            <img src="../../static/cogs_v3_256.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Docker-Proxy-Stack</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installation &amp; Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker-exec.html">DockerExec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mailcatching.html">E-Mail Catching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="upgrade-v2.html">Docker-Proxy-Stack Upgrade instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-the-docker-proxy-stack">What is the Docker-Proxy-Stack?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#so-why-do-we-do-all-this">So why do we do all this?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#how-does-the-proxy-stack-work">How does the Proxy-Stack work?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-add-projects-to-the-docker-proxy-network">How to add Projects to the Docker Proxy Network</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../simple-rest/index.html">Simple REST Bundle</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html"></a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Docker-Proxy-Stack</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="docker-proxy-stack">
+<span id="docs-docker-proxy-index"></span><h1>Docker-Proxy-Stack<a class="headerlink" href="#docker-proxy-stack" title="Permalink to this headline"></a></h1>
+<div class="toctree-wrapper compound" id="docs-docker-proxy-toc">
+</div>
+<section id="what-is-the-docker-proxy-stack">
+<h2>What is the Docker-Proxy-Stack?<a class="headerlink" href="#what-is-the-docker-proxy-stack" title="Permalink to this headline"></a></h2>
+<p>The docker proxy stack is primarily a toolkit for local web development that supports</p>
+<ol class="arabic simple">
+<li><p>SSL (<code class="docutils literal notranslate"><span class="pre">https://</span></code>) for all local projects.</p></li>
+<li><p>descriptive names instead of <code class="docutils literal notranslate"><span class="pre">localhost</span></code>.</p></li>
+<li><p>running multiple projects at the same time</p>
+<ul class="simple">
+<li><p>sharing database containers (MySQL, PostgreSQL &amp; Redis)</p></li>
+<li><p>sharing certificates</p></li>
+<li><p>sharing a reverse proxy (thus not blocking port 80/443)</p></li>
+</ul>
+</li>
+<li><p>easy initial setup</p></li>
+<li><p>adding as much “global service” docker containers as you like</p></li>
+<li><p>optional catching E-Mails via SMTP with mailcatcher</p></li>
+</ol>
+<p>Its tools are based on the <a class="reference external" href="https://github.com/nginx-proxy/nginx-proxy">nginx-proxy</a> from Jason Wilder and
+contributors.</p>
+<p><a class="reference internal" href="install.html#docs-docker-proxy-installation"><span class="std std-ref">» Take me to the installation part</span></a></p>
+<section id="so-why-do-we-do-all-this">
+<h3>So why do we do all this?<a class="headerlink" href="#so-why-do-we-do-all-this" title="Permalink to this headline"></a></h3>
+<p>If you are running multiple web applications on one machine at the same time you are running into a couple of issues.
+If your projects are already dockerized, every <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code> file will</p>
+<ul class="simple">
+<li><p>run their own webserver</p></li>
+<li><p>run their own database</p></li>
+<li><p>use probaby the same port for each of those.</p></li>
+</ul>
+<p>You also have to manage SSL certificates for each project.</p>
+<p><strong>The solution the Docker proxy stack provides is taking care of all shared ressources.</strong> So</p>
+<ul class="simple">
+<li><p>run a reverse proxy to manage all projects web-servers</p></li>
+<li><p>run one database server</p></li>
+<li><p>provide a custom certificate</p></li>
+<li><p>run DBA tools like PMA or Adminer</p></li>
+<li><p>run a mailcatcher</p></li>
+<li><p>and set all of it up in a conveniant way with <code class="docutils literal notranslate"><span class="pre">DockerExec</span></code> shell script.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The only requirement is to use the DockerExec shell script and have docker and docker-compose installed.</p>
+</div>
+</section>
+</section>
+<section id="how-does-the-proxy-stack-work">
+<span id="docs-docker-proxy-how-it-works"></span><h2>How does the Proxy-Stack work?<a class="headerlink" href="#how-does-the-proxy-stack-work" title="Permalink to this headline"></a></h2>
+<p>We first started with a basic <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code> setup of MySQL, PostgreSQL, Redis, Adminer and PhpMyAdmin. This setup
+was pretty static and not really extensible, as the compose file was comitted to the repository. This also limited the
+possibility to configure those five containers or even swap versions. If you wanted to change <code class="docutils literal notranslate"><span class="pre">mysql:5.7</span></code> image to a
+<code class="docutils literal notranslate"><span class="pre">mysql:8</span></code>, you probably lost those changes after a <code class="docutils literal notranslate"><span class="pre">DockerExec</span> <span class="pre">self-update</span></code> command.</p>
+<p>The new Proxy configuration does not work with <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code> anymore (at least not the proxy itself), but with
+single shell files. Each one of those files will start a single container into the proxy network. Like the Apache2, we
+now have <code class="docutils literal notranslate"><span class="pre">spawns-available</span></code> and <code class="docutils literal notranslate"><span class="pre">spawns-enabled</span></code> folders withing the repository directory, to tell the proxy, which
+containers will be started on init command.</p>
+<p>This allows to have a <code class="docutils literal notranslate"><span class="pre">mysql:5.7</span></code> and <code class="docutils literal notranslate"><span class="pre">mysql:8</span></code> container configured for the Proxy-Stack. You can even start and run
+both at the same time without conflicts, or just start the one you need and disable the other. The way to add projects
+from (multiple) <code class="docutils literal notranslate"><span class="pre">docker-compose.proxy.yaml</span></code> files (see below) did not change at all.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you missed the v2.*.* update or like to read more about “spawning” service containers, please read the
+<a class="reference internal" href="upgrade-v2.html#docs-docker-proxy-upgrade-v2"><span class="std std-ref">Docker-Proxy-Stack Upgrade instructions</span></a>.</p>
+</div>
+</section>
+<section id="how-to-add-projects-to-the-docker-proxy-network">
+<h2>How to add Projects to the Docker Proxy Network<a class="headerlink" href="#how-to-add-projects-to-the-docker-proxy-network" title="Permalink to this headline"></a></h2>
+<p>The main goal here is to add multiple projects, that are dockerized, to the same proxy network. For a documentation on
+how to resolve URLs to a specific docker container, please read
+<a class="reference external" href="https://github.com/nginx-proxy/nginx-proxy">the nginx-proxy documentation</a>.</p>
+<ol class="arabic">
+<li><p><code class="docutils literal notranslate"><span class="pre">DockerExec</span></code> expects a <code class="docutils literal notranslate"><span class="pre">docker-compose.proxy.y(a)ml</span></code> file that contains services you might need for your project.
+You may configure some NGINX like this:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nginx</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx:latest</span><span class="w"></span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${CON_PREFIX}-web</span><span class="w"></span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.:/var/www/html</span><span class="w"></span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># choose a docker.test subdomain</span><span class="w"></span>
+<span class="w">        </span><span class="nt">VIRTUAL_HOST</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-project.docker.test</span><span class="w"></span>
+<span class="w">        </span><span class="nt">VIRTUAL_PORT</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">443</span><span class="w"></span>
+<span class="w">        </span><span class="nt">VIRTUAL_PROTO</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https</span><span class="w"></span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">my-project</span></code> should be your project name.</p>
+</li>
+<li><p>Specify the Docker network you created above in <code class="docutils literal notranslate"><span class="pre">docker-compose.proxy.y(a)ml</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">services</span><span class="p">:</span><span class="w"></span>
+<span class="w">   </span><span class="c1"># ...</span><span class="w"></span>
+
+<span class="nt">networks</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${NETWORK_NAME}</span><span class="w"></span>
+</pre></div>
+</div>
+</li>
+<li><p>You also need a <code class="docutils literal notranslate"><span class="pre">.env</span></code> file to specify at least <code class="docutils literal notranslate"><span class="pre">CON_PREFIX</span></code> or <code class="docutils literal notranslate"><span class="pre">CON_NAME</span></code></p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Both of these files can be automatically generated with <code class="docutils literal notranslate"><span class="pre">DockerExec</span> <span class="pre">proxy</span> <span class="pre">generate</span> <span class="pre">{project-name}</span></code>!</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../index.html" class="btn btn-neutral float-left" title="Skript-Manufaktur Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="install.html" class="btn btn-neutral float-right" title="Installation &amp; Update" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Sengorius.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
