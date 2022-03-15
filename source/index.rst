@@ -9,6 +9,7 @@ Skript-Manufaktur Documentation
    :maxdepth: 1
    :hidden:
 
+   repositories/docker-proxy/index
    repositories/simple-rest/index
 
 
