@@ -8,6 +8,7 @@ Docker-Proxy-Stack
    :maxdepth: 1
    :hidden:
 
+   GitHub Repository <https://github.com/Sengorius/docker-proxy-stack>
    install
    docker-exec
    mailcatching
