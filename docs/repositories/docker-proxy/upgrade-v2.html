@@ -99,9 +99,11 @@ script.</p>
 Please use &#39;DockerExec self-update&#39; to switch to the latest version.
 </pre></div>
 </div>
-<p>If your current version is now v2.*.*, the biggest part of the update is already done. You are just missing the proxy
-containers.</p>
+<p>If your current version is now v2.*.*, the biggest part of the update is already done. Keep an eye on the <code class="docutils literal notranslate"><span class="pre">.env</span></code> file
+in your Proxy-Stack directory and compare it with the <code class="docutils literal notranslate"><span class="pre">.env.template</span></code> again. It has simplified a lot! Lastly you are
+missing the proxy containers.</p>
 <ol class="arabic simple">
+<li><p>Check the <code class="docutils literal notranslate"><span class="pre">.env</span></code> file in Docker-Proxy-Stack directory and compare with current <code class="docutils literal notranslate"><span class="pre">.env.template</span></code> file.</p></li>
 <li><p>Make sure, you saved all progress of your current projects and docker files.</p></li>
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">DockerExec</span> <span class="pre">finish</span></code>, to stop and remove any running docker container.</p></li>
 <li><p>As of installation in v1, you will probably have some lines added to your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> file. Those lines can now be

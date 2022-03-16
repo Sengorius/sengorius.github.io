@@ -23,9 +23,11 @@ script.
    You have currently checked out the tag 'v1.*.*', which is outdated!
    Please use 'DockerExec self-update' to switch to the latest version.
 
-If your current version is now v2.*.*, the biggest part of the update is already done. You are just missing the proxy
-containers.
+If your current version is now v2.*.*, the biggest part of the update is already done. Keep an eye on the ``.env`` file
+in your Proxy-Stack directory and compare it with the ``.env.template`` again. It has simplified a lot! Lastly you are
+missing the proxy containers.
 
+#. Check the ``.env`` file in Docker-Proxy-Stack directory and compare with current ``.env.template`` file.
 #. Make sure, you saved all progress of your current projects and docker files.
 #. Run ``DockerExec finish``, to stop and remove any running docker container.
 #. As of installation in v1, you will probably have some lines added to your ``.bashrc`` file. Those lines can now be
