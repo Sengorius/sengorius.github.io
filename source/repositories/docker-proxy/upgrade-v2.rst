@@ -9,6 +9,11 @@ Docker-Proxy-Stack Upgrade instructions
    tag v2.0.0 and above, which you will get by using the ``DockerExec self-update`` command. In case you have just
    installed the latest version, your are fine.
 
+.. warning::
+
+   There is a bug in Version v1.0.9 and v2.0.0 regarding the ``DockerExec self-update`` command. The command will only
+   work, if you change directory to where your Docker-Proxy-Stack is installed. The issue will be fixed in v2.0.1.
+
 To make the upgrade as easy is possible, follow these steps to reproduce the setup from Proxy-Stack v1.
 
 
