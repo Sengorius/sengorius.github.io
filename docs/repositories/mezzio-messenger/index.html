@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mezzio: Symfony-Messenger-Bridge &mdash;  1.0.0 documentation</title>
+      <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../static/additional.css" type="text/css" />
+    <link rel="shortcut icon" href="../../static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../static/documentation_options.js"></script>
+        <script src="../../static/jquery.js"></script>
+        <script src="../../static/underscore.js"></script>
+        <script src="../../static/doctools.js"></script>
+    <script src="../../static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Configuration" href="configuration.html" />
+    <link rel="prev" title="Simple REST Bundle" href="../simple-rest/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> 
+            <img src="../../static/cogs_v3_256.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../docker-proxy/index.html">Docker-Proxy-Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../simple-rest/index.html">Simple REST Bundle</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Mezzio: Symfony-Messenger-Bridge</a><ul>
+<li class="toctree-l2"><a class="reference external" href="https://github.com/Sengorius/docker-proxy-stack">GitHub Repository</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how-to-use.html">How to use the bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html"></a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Mezzio: Symfony-Messenger-Bridge</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mezzio-symfony-messenger-bridge">
+<span id="docs-mezzio-messenger-index"></span><h1>Mezzio: Symfony-Messenger-Bridge<a class="headerlink" href="#mezzio-symfony-messenger-bridge" title="Permalink to this headline"></a></h1>
+<div class="toctree-wrapper compound" id="docs-mezzio-messenger-toc">
+</div>
+<p>This package is a plugin for the <a class="reference external" href="https://docs.mezzio.dev/mezzio/">Mezzio framework</a> and injects the
+<a class="reference external" href="https://symfony.com/doc/current/messenger.html">Symfony/Messenger</a> as good as possible into it.</p>
+<p>Take a look in the “<a class="reference internal" href="how-to-use.html#docs-mezzio-messenger-how-to"><span class="std std-ref">How to use the bridge</span></a>” section for examples.</p>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h2>
+<p>With <a class="reference external" href="https://getcomposer.org/">composer</a> run the following statement:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ composer require skript-manufaktur/mezzio-messenger-bridge
+</pre></div>
+</div>
+<p>Open the <code class="docutils literal notranslate"><span class="pre">config/config.php</span></code> and add following line before the <code class="docutils literal notranslate"><span class="pre">App\ConfigProvider::class</span></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">MessageBus\ConfigProvider::class,</span>
+</pre></div>
+</div>
+<p>Copy the configuration example in <code class="docutils literal notranslate"><span class="pre">vendor/skript-manufaktur/mezzio-messenger-bridge/messagebus.global.php.dist</span></code> to
+<code class="docutils literal notranslate"><span class="pre">config/autoload/messagebus.global.php</span></code> or insert its content into your <code class="docutils literal notranslate"><span class="pre">config/autoload/local.php</span></code>. Then update it
+to your needs.</p>
+<p>You may also copy or link the binary console to <code class="docutils literal notranslate"><span class="pre">bin/message-bus</span></code> or just use it from the <code class="docutils literal notranslate"><span class="pre">vendor/bin</span></code> directory.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../simple-rest/index.html" class="btn btn-neutral float-left" title="Simple REST Bundle" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="configuration.html" class="btn btn-neutral float-right" title="Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Sengorius.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to use the bridge &mdash;  1.0.0 documentation</title>
+      <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../static/additional.css" type="text/css" />
+    <link rel="shortcut icon" href="../../static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../static/documentation_options.js"></script>
+        <script src="../../static/jquery.js"></script>
+        <script src="../../static/underscore.js"></script>
+        <script src="../../static/doctools.js"></script>
+    <script src="../../static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Configuration" href="configuration.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> 
+            <img src="../../static/cogs_v3_256.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../docker-proxy/index.html">Docker-Proxy-Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../simple-rest/index.html">Simple REST Bundle</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Mezzio: Symfony-Messenger-Bridge</a><ul class="current">
+<li class="toctree-l2"><a class="reference external" href="https://github.com/Sengorius/docker-proxy-stack">GitHub Repository</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">How to use the bridge</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#asynchronous-message-consuming">Asynchronous message consuming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-the-logger">Using the Logger</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#installation">Installation</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html"></a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Mezzio: Symfony-Messenger-Bridge</a> &raquo;</li>
+      <li>How to use the bridge</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="how-to-use-the-bridge">
+<span id="docs-mezzio-messenger-how-to"></span><h1>How to use the bridge<a class="headerlink" href="#how-to-use-the-bridge" title="Permalink to this headline"></a></h1>
+<p>The main usage for a message bus is the asynchronous handling of tasks from so called ‘workers’ or ‘handlers’ (Symfony).
+Therefore a value object (message) is dispatched on a bus. A worker is specified to handle this message (asynchronously
+or syncronously). This prevents long running jobs from blocking a response for the user, if we stick to the http
+context.</p>
+<p>A message could be as simple as this:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">namespace App\Worker;</span>
+
+<span class="x">class UnimportantAsyncMessage</span>
+<span class="x">{</span>
+<span class="x">    private string $title;</span>
+<span class="x">    private ?string $message;</span>
+
+
+<span class="x">    public function __construct(string $title, ?string $message = null)</span>
+<span class="x">    {</span>
+<span class="x">        $this-&gt;title = $title;</span>
+<span class="x">        $this-&gt;message = $message;</span>
+<span class="x">    }</span>
+
+<span class="x">    public function getTitle(): string</span>
+<span class="x">    {</span>
+<span class="x">        return $this-&gt;title;</span>
+<span class="x">    }</span>
+
+<span class="x">    public function getMessage(): ?string</span>
+<span class="x">    {</span>
+<span class="x">        return $this-&gt;message;</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+<p>To handle that message, we also define a worker, that is specific to this message. It uses the <code class="docutils literal notranslate"><span class="pre">__invoke()</span></code> method
+and has to be configured correctly. See the “<a class="reference internal" href="configuration.html#docs-mezzio-messenger-config"><span class="std std-ref">Configuration</span></a>” section for details.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">namespace App\Worker;</span>
+
+<span class="x">use Psr\Container\ContainerExceptionInterface;</span>
+<span class="x">use Psr\Container\ContainerInterface;</span>
+<span class="x">use Psr\Container\NotFoundExceptionInterface;</span>
+<span class="x">use Psr\Log\LoggerInterface;</span>
+
+<span class="x">final class UnimportantWorker</span>
+<span class="x">{</span>
+<span class="x">    private LoggerInterface $logger;</span>
+
+
+<span class="x">    public function __construct(ContainerInterface $container)</span>
+<span class="x">    {</span>
+<span class="x">        $this-&gt;logger = $container-&gt;get(&#39;MessageBusLogger&#39;);</span>
+<span class="x">    }</span>
+
+<span class="x">    public function __invoke(UnimportantAsyncMessage $message): void</span>
+<span class="x">    {</span>
+<span class="x">        $this-&gt;logger-&gt;info(sprintf(&#39;Working on message with title &quot;%s&quot;&#39;, $message-&gt;getTitle()));</span>
+
+<span class="x">        // handle the message, e.g. updating the database or send an e-mail</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+<p>The following example represents a handler that uses a form to gather info, which will be stuffed into an asynchronous
+message. We can directly answer the user after submitting and later display calculated results. The <code class="docutils literal notranslate"><span class="pre">SentStamp</span></code> will
+be added by Symfony’s middleware and indicates the successful delegation to a transport. Don’t forget to pass the
+<code class="docutils literal notranslate"><span class="pre">MessageBusInterface</span></code> service in the handlers factory!</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">namespace App\Handler;</span>
+
+<span class="x">use App\Worker\ImportantSyncMessage;</span>
+<span class="x">use App\Worker\UnimportantAsyncMessage;</span>
+<span class="x">use Laminas\Diactoros\Response\HtmlResponse;</span>
+<span class="x">use Mezzio\Template\TemplateRendererInterface;</span>
+<span class="x">use Psr\Http\Message\ResponseInterface;</span>
+<span class="x">use Psr\Http\Message\ServerRequestInterface;</span>
+<span class="x">use Psr\Http\Server\RequestHandlerInterface;</span>
+<span class="x">use Symfony\Component\Messenger\MessageBusInterface;</span>
+<span class="x">use Symfony\Component\Messenger\Stamp\HandledStamp;</span>
+<span class="x">use Symfony\Component\Messenger\Stamp\SentStamp;</span>
+
+<span class="x">final class MessageHandler implements RequestHandlerInterface</span>
+<span class="x">{</span>
+<span class="x">    private TemplateRendererInterface $template;</span>
+<span class="x">    private MessageBusInterface $bus;</span>
+
+
+<span class="x">    public function __construct(TemplateRendererInterface $template, MessageBusInterface $bus)</span>
+<span class="x">    {</span>
+<span class="x">        $this-&gt;template = $template;</span>
+<span class="x">        $this-&gt;bus = $bus;</span>
+<span class="x">    }</span>
+
+<span class="x">    public function handle(ServerRequestInterface $request): ResponseInterface</span>
+<span class="x">    {</span>
+<span class="x">        $params = $request-&gt;getParsedBody();</span>
+
+<span class="x">        if (&#39;POST&#39; === $request-&gt;getMethod() &amp;&amp; is_array($params)) {</span>
+<span class="x">            $title = $params[&#39;title&#39;] ?? null;</span>
+<span class="x">            $description = $params[&#39;message&#39;] ?? null;</span>
+
+<span class="x">            if (!empty($title)) {</span>
+<span class="x">                $message = new UnimportantAsyncMessage($title, $description);</span>
+<span class="x">                $envelope = $this-&gt;bus-&gt;dispatch($amqpMessage);</span>
+
+<span class="x">                if (null !== $envelope-&gt;last(SentStamp::class)) {</span>
+<span class="x">                    // success</span>
+<span class="x">                } else {</span>
+<span class="x">                    // failure</span>
+<span class="x">                }</span>
+<span class="x">            } else {</span>
+<span class="x">                // required params missing</span>
+<span class="x">            }</span>
+<span class="x">        }</span>
+
+<span class="x">        return new HtmlResponse($this-&gt;template-&gt;render(&#39;...&#39;));</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+<section id="asynchronous-message-consuming">
+<h2>Asynchronous message consuming<a class="headerlink" href="#asynchronous-message-consuming" title="Permalink to this headline"></a></h2>
+<p>Taking the example above as granted, we now have at least one un-handled message in our broker (RabbitMQ, Database or
+Redis) that needs to be “consumed”. To handle this asynchronously, the package provides a <code class="docutils literal notranslate"><span class="pre">vendor/bin/message-bus</span></code>
+binary that is based on the <code class="docutils literal notranslate"><span class="pre">Symfony/Console</span></code> component. Try <code class="docutils literal notranslate"><span class="pre">php</span> <span class="pre">vendor/bin/message-bus</span></code> to list possible commands
+for the consumers.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">php</span> <span class="pre">vendor/bin/message-bus</span> <span class="pre">messenger:consume</span> <span class="pre">Transport::$name</span></code> you can start a consumer that will take and
+handle all messages from the given transport one by one. You should also take a look at the <a class="reference external" href="https://symfony.com/doc/current/messenger.html#supervisor-configuration">supervisor configuration
+from Symfony Docs</a> for making the consumer
+sustainable.</p>
+</section>
+<section id="using-the-logger">
+<h2>Using the Logger<a class="headerlink" href="#using-the-logger" title="Permalink to this headline"></a></h2>
+<p>With this package there is a Monolog service registered as ‘MessageBusLogger’ in the <code class="docutils literal notranslate"><span class="pre">Psr\Container</span></code> (Laminas Service
+Manager). You can use the service to write into the same log files, as the Symfony services do. Take a look on the
+‘UnimportantWorker’ above for an example.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="configuration.html" class="btn btn-neutral float-left" title="Configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Sengorius.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

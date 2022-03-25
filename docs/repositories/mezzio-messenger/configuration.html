@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configuration &mdash;  1.0.0 documentation</title>
+      <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../static/additional.css" type="text/css" />
+    <link rel="shortcut icon" href="../../static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../static/documentation_options.js"></script>
+        <script src="../../static/jquery.js"></script>
+        <script src="../../static/underscore.js"></script>
+        <script src="../../static/doctools.js"></script>
+    <script src="../../static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="How to use the bridge" href="how-to-use.html" />
+    <link rel="prev" title="Mezzio: Symfony-Messenger-Bridge" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> 
+            <img src="../../static/cogs_v3_256.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../docker-proxy/index.html">Docker-Proxy-Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../simple-rest/index.html">Simple REST Bundle</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Mezzio: Symfony-Messenger-Bridge</a><ul class="current">
+<li class="toctree-l2"><a class="reference external" href="https://github.com/Sengorius/docker-proxy-stack">GitHub Repository</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#transports">Transports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#delegating-the-messages">Delegating the messages</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="how-to-use.html">How to use the bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#installation">Installation</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html"></a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Mezzio: Symfony-Messenger-Bridge</a> &raquo;</li>
+      <li>Configuration</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="configuration">
+<span id="docs-mezzio-messenger-config"></span><h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline"></a></h1>
+<p>The configuration for this bridge is defined under the <code class="docutils literal notranslate"><span class="pre">messageBus</span></code> namespace for the <code class="docutils literal notranslate"><span class="pre">Laminas\ConfigAggregator</span></code>.
+It holds multiple path variables, mapping arrays and a failure transport definition.</p>
+<p>Any message that is apssed through a messenger middleware or through a command (working asynchronously) will be logged
+with the <a class="reference external" href="https://packagist.org/packages/monolog/monolog">Monolog</a> library. Some of the Symfony commands to handle
+the worker need a cache. Both of these paths can be defined with following configuration. The default configuration
+will store files in the <code class="docutils literal notranslate"><span class="pre">data/cache/message-bus</span></code> and <code class="docutils literal notranslate"><span class="pre">data/logs/message-bus</span></code> directories.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">&#39;messageBus&#39; =&gt; [</span>
+<span class="x">    &#39;logPath&#39; =&gt; dirname(__DIR__, 2).&#39;/data/logs/message-bus&#39;,</span>
+<span class="x">    &#39;cachePath&#39; =&gt; dirname(__DIR__, 2).&#39;/data/cache&#39;,</span>
+
+<span class="x">    // ...</span>
+<span class="x">],</span>
+</pre></div>
+</div>
+<section id="transports">
+<h2>Transports<a class="headerlink" href="#transports" title="Permalink to this headline"></a></h2>
+<p>A ‘transport’ defines the channels, where asynchronous messages can be send to. This can be a database and delegated
+via Doctrine, a Redis instance or a RabbitMQ. Maybe more to come. To define multiple channels, simply create multiple
+DSNs within this configuration.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">&#39;messageBus&#39; =&gt; [</span>
+<span class="x">    &#39;transportDSNs&#39; =&gt; [</span>
+<span class="x">        // name     =&gt; DSN,</span>
+<span class="x">        &#39;default&#39;   =&gt; &#39;amqp://guest:password@rabbitmq.tld:5672/%2f/default&#39;,</span>
+<span class="x">        &#39;failure&#39;   =&gt; &#39;amqp://guest:password@rabbitmq.tld:5672/%2f/failure&#39;,</span>
+<span class="x">        &#39;doctrine&#39;  =&gt; &#39;doctrine://guest:password@mariadb10:3306/default&#39;,</span>
+<span class="x">        &#39;redis&#39;     =&gt; &#39;redis://redis5:6379/default&#39;,</span>
+<span class="x">    ],</span>
+
+<span class="x">    // ...</span>
+<span class="x">],</span>
+</pre></div>
+</div>
+<p>For each configured transport DSN, a service named <code class="docutils literal notranslate"><span class="pre">Transport::$name</span></code> will be added to the service container, holding
+an instance of <code class="docutils literal notranslate"><span class="pre">Symfony\Component\Messenger\Transport\TransportInterface</span></code> with the necessary connection to the broker.
+To get a transport from the container, you can either pass the string - e.g. <code class="docutils literal notranslate"><span class="pre">Transport::default</span></code> - or use the helper
+<code class="docutils literal notranslate"><span class="pre">MessageBus\Factory\Transporthelper::createTransportName($name)</span></code> for the <code class="docutils literal notranslate"><span class="pre">$container-&gt;get(...)</span></code> instruction.</p>
+<p>One of those transports should be defined as the ‘failure transport’. Symfony messenger will put any message that has
+failed 3 times onto this transport. It also offers commands to display and retry failed messages or remove them savely.
+This transport does not have to be named ‘failure’.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">&#39;messageBus&#39; =&gt; [</span>
+<span class="x">    &#39;failureTransport&#39; =&gt; MessageBus\Factory\TransportHelper::createTransportName(&#39;failure&#39;),</span>
+
+<span class="x">    // ...</span>
+<span class="x">],</span>
+</pre></div>
+</div>
+</section>
+<section id="delegating-the-messages">
+<h2>Delegating the messages<a class="headerlink" href="#delegating-the-messages" title="Permalink to this headline"></a></h2>
+<p>Each message needs a ‘Worker’ to handle it. You can find out more in the “<a class="reference internal" href="how-to-use.html#docs-mezzio-messenger-how-to"><span class="std std-ref">How to use the bridge</span></a>” section
+or in the <a class="reference external" href="https://symfony.com/doc/current/messenger.html">Symfony documentation</a>. The bridge handles the associations
+via array maps, defining message to worker(s) and message to transport(s). You can pass a string or array as value.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">&#39;messageBus&#39; =&gt; [</span>
+<span class="x">    // ...</span>
+
+<span class="x">    &#39;handlersLocatorMap&#39; =&gt; [</span>
+<span class="x">        App\Worker\ImportantSyncMessage::class =&gt; [App\Worker\ImportantWorker::class],</span>
+<span class="x">        App\Worker\UnimportantAsyncMessage::class =&gt; App\Worker\UnimportantWorker::class,</span>
+<span class="x">    ],</span>
+
+<span class="x">    &#39;sendersLocatorMap&#39; =&gt; [</span>
+<span class="x">        App\Worker\UnimportantAsyncMessage::class =&gt; &#39;Transport::default&#39;,</span>
+<span class="x">    ],</span>
+<span class="x">],</span>
+</pre></div>
+</div>
+<p>A message not listed in the ‘sendersLocatorMap’ will be handle synchronously on request.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Mezzio: Symfony-Messenger-Bridge" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="how-to-use.html" class="btn btn-neutral float-right" title="How to use the bridge" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Sengorius.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
