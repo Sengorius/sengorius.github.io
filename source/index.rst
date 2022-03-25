@@ -11,6 +11,7 @@ Skript-Manufaktur Documentation
 
    repositories/docker-proxy/index
    repositories/simple-rest/index
+   repositories/mezzio-messenger/index
 
 
 Preamble
