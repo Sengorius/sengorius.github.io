@@ -80,6 +80,72 @@ via array maps, defining message to worker(s) and message to transport(s). You c
        'sendersLocatorMap' => [
            App\Worker\UnimportantAsyncMessage::class => 'Transport::default',
        ],
+
+       // ...
    ],
 
 A message not listed in the 'sendersLocatorMap' will be handle synchronously on request.
+
+
+Custom middlewares
+------------------
+
+As described `in the official Symfony docs <https://symfony.com/doc/current/messenger.html#middleware>`_, you can define
+custom middlewares by adding classes that implement the ``MiddlewareInterface``. To add your custom middlewares in
+Mezzio, create such a class and use the factory method, to configure this service in ``Psr\Container``.
+
+.. code-block:: php
+
+   class MyMiddleware implements MiddlewareInterface
+   {
+       private MyService $service;
+
+       public function __construct(MyService $service)
+       {
+           $this->service = $service;
+       }
+
+       public function handle(Envelope $envelope, StackInterface $stack): Envelope
+       {
+           // implement you middleware
+
+           return $stack->next()->handle($envelope, $stack);
+       }
+   }
+
+.. code-block:: php
+
+   class ConfigProvider
+   {
+       public function __invoke(): array
+       {
+           return [
+               'dependencies' => $this->getDependencies(),
+           ];
+       }
+
+       public function getDependencies(): array
+       {
+           return [
+               'factories'  => [
+                   MyMiddleware::class => MyMiddlewareFactory::class,
+                   //...
+               ],
+           ];
+       }
+
+       //...
+   }
+
+Then add the middleware class to messenger configuration:
+
+.. code-block:: php
+
+   'messageBus' => [
+       // ...
+
+       # define custom middlewares
+       'customMiddlewares' => [
+           MyMiddleware::class,
+       ],
+   ],

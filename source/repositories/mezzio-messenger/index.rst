@@ -8,7 +8,7 @@ Mezzio: Symfony-Messenger-Bridge
    :maxdepth: 1
    :hidden:
 
-   GitHub Repository <https://github.com/Sengorius/docker-proxy-stack>
+   GitHub Repository <https://github.com/Sengorius/mezzio-messenger-bridge>
    configuration
    how-to-use
 

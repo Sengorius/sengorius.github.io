@@ -44,10 +44,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../docker-proxy/index.html">Docker-Proxy-Stack</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../simple-rest/index.html">Simple REST Bundle</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Mezzio: Symfony-Messenger-Bridge</a><ul class="current">
-<li class="toctree-l2"><a class="reference external" href="https://github.com/Sengorius/docker-proxy-stack">GitHub Repository</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://github.com/Sengorius/mezzio-messenger-bridge">GitHub Repository</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Configuration</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#transports">Transports</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#delegating-the-messages">Delegating the messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#custom-middlewares">Custom middlewares</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="how-to-use.html">How to use the bridge</a></li>
@@ -145,10 +146,70 @@ via array maps, defining message to worker(s) and message to transport(s). You c
 <span class="x">    &#39;sendersLocatorMap&#39; =&gt; [</span>
 <span class="x">        App\Worker\UnimportantAsyncMessage::class =&gt; &#39;Transport::default&#39;,</span>
 <span class="x">    ],</span>
+
+<span class="x">    // ...</span>
 <span class="x">],</span>
 </pre></div>
 </div>
 <p>A message not listed in the ‘sendersLocatorMap’ will be handle synchronously on request.</p>
+</section>
+<section id="custom-middlewares">
+<h2>Custom middlewares<a class="headerlink" href="#custom-middlewares" title="Permalink to this headline"></a></h2>
+<p>As described <a class="reference external" href="https://symfony.com/doc/current/messenger.html#middleware">in the official Symfony docs</a>, you can define
+custom middlewares by adding classes that implement the <code class="docutils literal notranslate"><span class="pre">MiddlewareInterface</span></code>. To add your custom middlewares in
+Mezzio, create such a class and use the factory method, to configure this service in <code class="docutils literal notranslate"><span class="pre">Psr\Container</span></code>.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">class MyMiddleware implements MiddlewareInterface</span>
+<span class="x">{</span>
+<span class="x">    private MyService $service;</span>
+
+<span class="x">    public function __construct(MyService $service)</span>
+<span class="x">    {</span>
+<span class="x">        $this-&gt;service = $service;</span>
+<span class="x">    }</span>
+
+<span class="x">    public function handle(Envelope $envelope, StackInterface $stack): Envelope</span>
+<span class="x">    {</span>
+<span class="x">        // implement you middleware</span>
+
+<span class="x">        return $stack-&gt;next()-&gt;handle($envelope, $stack);</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">class ConfigProvider</span>
+<span class="x">{</span>
+<span class="x">    public function __invoke(): array</span>
+<span class="x">    {</span>
+<span class="x">        return [</span>
+<span class="x">            &#39;dependencies&#39; =&gt; $this-&gt;getDependencies(),</span>
+<span class="x">        ];</span>
+<span class="x">    }</span>
+
+<span class="x">    public function getDependencies(): array</span>
+<span class="x">    {</span>
+<span class="x">        return [</span>
+<span class="x">            &#39;factories&#39;  =&gt; [</span>
+<span class="x">                MyMiddleware::class =&gt; MyMiddlewareFactory::class,</span>
+<span class="x">                //...</span>
+<span class="x">            ],</span>
+<span class="x">        ];</span>
+<span class="x">    }</span>
+
+<span class="x">    //...</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+<p>Then add the middleware class to messenger configuration:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">&#39;messageBus&#39; =&gt; [</span>
+<span class="x">    // ...</span>
+
+<span class="x">    # define custom middlewares</span>
+<span class="x">    &#39;customMiddlewares&#39; =&gt; [</span>
+<span class="x">        MyMiddleware::class,</span>
+<span class="x">    ],</span>
+<span class="x">],</span>
+</pre></div>
+</div>
 </section>
 </section>
 
