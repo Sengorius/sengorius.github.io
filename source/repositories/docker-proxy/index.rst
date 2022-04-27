@@ -13,6 +13,7 @@ Docker-Proxy-Stack
    docker-exec
    mailcatching
    upgrade-v2
+   spawn-examples
 
 
 What is the Docker-Proxy-Stack?
