@@ -22,6 +22,7 @@ Advantages
 How to use DockerExec?
 ----------------------
 
+#. Install and configure this project.
 #. Try and follow ``DockerExec help`` for a list of commands.
 
 
@@ -38,6 +39,8 @@ You also need Bash. ``/bin/sh`` will not suffice.
 
 #. You have to provide a ``.env`` file in your project root to set necessary variables. A best practice would be to
    have a version-controlled ``.env.template`` which you copy over to ``.env`` and customize on deployment.
+
+   - As of v2.1.0 the projects default ``.env`` file name can be configured in the Proxy's ``.env`` configuration file
 
 
 .. _docs_docker-proxy_spawn-instructions:

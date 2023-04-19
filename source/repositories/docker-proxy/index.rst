@@ -62,7 +62,11 @@ You also have to manage SSL certificates for each project.
 
 .. note::
 
-   The only requirement is to use the DockerExec shell script and have docker and docker-compose installed.
+   The only requirement is to use the DockerExec shell script and have ``git``, ``docker`` and ``docker-compose``
+   installed.
+
+   As of v2.1.0 the "docker compose" extension can also be used and the "docker-compose" binary is not necessary
+   anymore.
 
 
 .. _docs_docker-proxy_how-it-works:
