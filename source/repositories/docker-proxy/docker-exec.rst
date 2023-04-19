@@ -16,6 +16,7 @@ Advantages
 #. Synchronize the containers ``/etc/hosts`` files automatically.
 #. Starting up a project will print the projects domain to your command line.
 #. Helps with "spawning" new global containers for the network.
+#. Helps with the import of database files into running MySQL/PostgreSQL containers.
 
 
 How to use DockerExec?
@@ -67,6 +68,8 @@ directory, you can use the ``DockerExec spawn enabled/disable {filename}`` comma
 in mind to restart the Proxy-Stack, so the changes can take effect.
 
 
+.. _docs_docker-proxy_minimal-config-php:
+
 A Minimal Configuration for PHP
 -------------------------------
 
@@ -76,8 +79,6 @@ Some environment variables cannot be read from the ``.env`` file and have to be 
 .. code-block:: yaml
 
    # docker-compose.proxy.yml
-   version: '3.5'
-
    services:
        web:
            image: ${WEB_IMAGE}
@@ -85,9 +86,6 @@ Some environment variables cannot be read from the ``.env`` file and have to be 
            env_file: .env
            volumes:
                - .:/var/www/html
-           expose:
-               - 80
-               - 443
            environment:
                VIRTUAL_HOST: my-project.docker.test
                VIRTUAL_PORT: 443
