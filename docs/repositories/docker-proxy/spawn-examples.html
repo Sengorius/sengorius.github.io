@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Spawn Container Examples &mdash;  1.0.0 documentation</title>
@@ -14,9 +14,8 @@
   <![endif]-->
   
         <script data-url_root="../../" id="documentation_options" src="../../static/documentation_options.js"></script>
-        <script src="../../static/jquery.js"></script>
-        <script src="../../static/underscore.js"></script>
         <script src="../../static/doctools.js"></script>
+        <script src="../../static/sphinx_highlight.js"></script>
     <script src="../../static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -29,12 +28,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> 
-            <img src="../../static/cogs_v3_256.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            
+              <img src="../../static/cogs_v3_256.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -77,9 +80,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="index.html">Docker-Proxy-Stack</a> &raquo;</li>
-      <li>Spawn Container Examples</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Docker-Proxy-Stack</a></li>
+      <li class="breadcrumb-item active">Spawn Container Examples</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -89,44 +92,44 @@
            <div itemprop="articleBody">
              
   <section id="spawn-container-examples">
-<span id="docs-docker-proxy-examples"></span><h1>Spawn Container Examples<a class="headerlink" href="#spawn-container-examples" title="Permalink to this headline"></a></h1>
+<span id="docs-docker-proxy-examples"></span><h1>Spawn Container Examples<a class="headerlink" href="#spawn-container-examples" title="Permalink to this heading"></a></h1>
 <p>A list of copy &amp; paste examples for the available spawns in Docker-Proxy-Stack.</p>
 <section id="mysql-mariadb-phpmyadmin">
-<h2>MySQL, MariaDB &amp; PhpMyAdmin<a class="headerlink" href="#mysql-mariadb-phpmyadmin" title="Permalink to this headline"></a></h2>
+<h2>MySQL, MariaDB &amp; PhpMyAdmin<a class="headerlink" href="#mysql-mariadb-phpmyadmin" title="Permalink to this heading"></a></h2>
 <p><a class="reference external" href="https://hub.docker.com/_/mysql">https://hub.docker.com/_/mysql</a></p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="ch">#!/usr/bin/env bash</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="nv">CONTAINER_NAME</span><span class="o">=</span><span class="s2">&quot;proxy-mysql5&quot;</span>
 <span class="linenos"> 4</span>
-<span class="linenos"> 5</span>docker run --tty --detach <span class="se">\</span>
-<span class="linenos"> 6</span>    --name <span class="s2">&quot;</span><span class="si">${</span><span class="nv">CONTAINER_NAME</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span>
-<span class="linenos"> 7</span>    --volume <span class="s2">&quot;proxy-data-db5:/var/lib/mysql&quot;</span> <span class="se">\</span>
-<span class="linenos"> 8</span>    --volume <span class="s2">&quot;</span><span class="si">${</span><span class="nv">DATA_PATH</span><span class="si">}</span><span class="s2">:/var/data&quot;</span> <span class="se">\</span>
-<span class="linenos"> 9</span>    --network <span class="s2">&quot;</span><span class="si">${</span><span class="nv">NETWORK_NAME</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span>
-<span class="linenos">10</span>    --restart unless-stopped <span class="se">\</span>
-<span class="linenos">11</span>    --env <span class="nv">TZ</span><span class="o">=</span>Europe/Amsterdam <span class="se">\</span>
-<span class="linenos">12</span>    --env <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>root <span class="se">\</span>
-<span class="linenos">13</span>    --env <span class="nv">MYSQL_PORT</span><span class="o">=</span><span class="m">3306</span> <span class="se">\</span>
-<span class="linenos">14</span>    mysql:5.7 --character-set-server<span class="o">=</span>utf8mb4 <span class="se">\</span>
-<span class="linenos">15</span>              --collation-server<span class="o">=</span>utf8mb4_unicode_ci <span class="se">\</span>
-<span class="linenos">16</span>              --sql_mode<span class="o">=</span><span class="s2">&quot;STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION&quot;</span>
+<span class="linenos"> 5</span>docker<span class="w"> </span>run<span class="w"> </span>--tty<span class="w"> </span>--detach<span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 6</span><span class="w">    </span>--name<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CONTAINER_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 7</span><span class="w">    </span>--volume<span class="w"> </span><span class="s2">&quot;proxy-data-db5:/var/lib/mysql&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 8</span><span class="w">    </span>--volume<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">DATA_PATH</span><span class="si">}</span><span class="s2">:/var/data&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 9</span><span class="w">    </span>--network<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">NETWORK_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">10</span><span class="w">    </span>--restart<span class="w"> </span>unless-stopped<span class="w"> </span><span class="se">\</span>
+<span class="linenos">11</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">TZ</span><span class="o">=</span>Europe/Amsterdam<span class="w"> </span><span class="se">\</span>
+<span class="linenos">12</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>root<span class="w"> </span><span class="se">\</span>
+<span class="linenos">13</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">MYSQL_PORT</span><span class="o">=</span><span class="m">3306</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">14</span><span class="w">    </span>mysql:5.7<span class="w"> </span>--character-set-server<span class="o">=</span>utf8mb4<span class="w"> </span><span class="se">\</span>
+<span class="linenos">15</span><span class="w">              </span>--collation-server<span class="o">=</span>utf8mb4_unicode_ci<span class="w"> </span><span class="se">\</span>
+<span class="linenos">16</span><span class="w">              </span>--sql_mode<span class="o">=</span><span class="s2">&quot;STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION&quot;</span>
 </pre></div>
 </div>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="ch">#!/usr/bin/env bash</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="nv">CONTAINER_NAME</span><span class="o">=</span><span class="s2">&quot;proxy-mysql8&quot;</span>
 <span class="linenos"> 4</span>
-<span class="linenos"> 5</span>docker run --tty --detach <span class="se">\</span>
-<span class="linenos"> 6</span>    --name <span class="s2">&quot;</span><span class="si">${</span><span class="nv">CONTAINER_NAME</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span>
-<span class="linenos"> 7</span>    --volume <span class="s2">&quot;proxy-data-db8:/var/lib/mysql&quot;</span> <span class="se">\</span>
-<span class="linenos"> 8</span>    --volume <span class="s2">&quot;</span><span class="si">${</span><span class="nv">DATA_PATH</span><span class="si">}</span><span class="s2">:/var/data&quot;</span> <span class="se">\</span>
-<span class="linenos"> 9</span>    --network <span class="s2">&quot;</span><span class="si">${</span><span class="nv">NETWORK_NAME</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span>
-<span class="linenos">10</span>    --restart unless-stopped <span class="se">\</span>
-<span class="linenos">11</span>    --env <span class="nv">TZ</span><span class="o">=</span>Europe/Amsterdam <span class="se">\</span>
-<span class="linenos">12</span>    --env <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>root <span class="se">\</span>
-<span class="linenos">13</span>    --env <span class="nv">MYSQL_PORT</span><span class="o">=</span><span class="m">3306</span> <span class="se">\</span>
-<span class="linenos">14</span>    mysql:8 --character-set-server<span class="o">=</span>utf8mb4 <span class="se">\</span>
-<span class="linenos">15</span>            --collation-server<span class="o">=</span>utf8mb4_unicode_ci
+<span class="linenos"> 5</span>docker<span class="w"> </span>run<span class="w"> </span>--tty<span class="w"> </span>--detach<span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 6</span><span class="w">    </span>--name<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CONTAINER_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 7</span><span class="w">    </span>--volume<span class="w"> </span><span class="s2">&quot;proxy-data-db8:/var/lib/mysql&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 8</span><span class="w">    </span>--volume<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">DATA_PATH</span><span class="si">}</span><span class="s2">:/var/data&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 9</span><span class="w">    </span>--network<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">NETWORK_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">10</span><span class="w">    </span>--restart<span class="w"> </span>unless-stopped<span class="w"> </span><span class="se">\</span>
+<span class="linenos">11</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">TZ</span><span class="o">=</span>Europe/Amsterdam<span class="w"> </span><span class="se">\</span>
+<span class="linenos">12</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>root<span class="w"> </span><span class="se">\</span>
+<span class="linenos">13</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">MYSQL_PORT</span><span class="o">=</span><span class="m">3306</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">14</span><span class="w">    </span>mysql:8<span class="w"> </span>--character-set-server<span class="o">=</span>utf8mb4<span class="w"> </span><span class="se">\</span>
+<span class="linenos">15</span><span class="w">            </span>--collation-server<span class="o">=</span>utf8mb4_unicode_ci
 </pre></div>
 </div>
 <p><a class="reference external" href="https://hub.docker.com/_/mariadb">https://hub.docker.com/_/mariadb</a></p>
@@ -134,16 +137,16 @@
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="nv">CONTAINER_NAME</span><span class="o">=</span><span class="s2">&quot;proxy-mariadb10&quot;</span>
 <span class="linenos"> 4</span>
-<span class="linenos"> 5</span>docker run --tty --detach <span class="se">\</span>
-<span class="linenos"> 6</span>    --name <span class="s2">&quot;</span><span class="si">${</span><span class="nv">CONTAINER_NAME</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span>
-<span class="linenos"> 7</span>    --volume <span class="s2">&quot;proxy-data-mdb10:/var/lib/mysql&quot;</span> <span class="se">\</span>
-<span class="linenos"> 8</span>    --volume <span class="s2">&quot;</span><span class="si">${</span><span class="nv">DATA_PATH</span><span class="si">}</span><span class="s2">:/var/data&quot;</span> <span class="se">\</span>
-<span class="linenos"> 9</span>    --network <span class="s2">&quot;</span><span class="si">${</span><span class="nv">NETWORK_NAME</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span>
-<span class="linenos">10</span>    --restart unless-stopped <span class="se">\</span>
-<span class="linenos">11</span>    --env <span class="nv">TZ</span><span class="o">=</span>Europe/Amsterdam <span class="se">\</span>
-<span class="linenos">12</span>    --env <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>root <span class="se">\</span>
-<span class="linenos">13</span>    --env <span class="nv">MYSQL_PORT</span><span class="o">=</span><span class="m">3306</span> <span class="se">\</span>
-<span class="linenos">14</span>    mariadb:10
+<span class="linenos"> 5</span>docker<span class="w"> </span>run<span class="w"> </span>--tty<span class="w"> </span>--detach<span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 6</span><span class="w">    </span>--name<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CONTAINER_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 7</span><span class="w">    </span>--volume<span class="w"> </span><span class="s2">&quot;proxy-data-mdb10:/var/lib/mysql&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 8</span><span class="w">    </span>--volume<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">DATA_PATH</span><span class="si">}</span><span class="s2">:/var/data&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 9</span><span class="w">    </span>--network<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">NETWORK_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">10</span><span class="w">    </span>--restart<span class="w"> </span>unless-stopped<span class="w"> </span><span class="se">\</span>
+<span class="linenos">11</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">TZ</span><span class="o">=</span>Europe/Amsterdam<span class="w"> </span><span class="se">\</span>
+<span class="linenos">12</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>root<span class="w"> </span><span class="se">\</span>
+<span class="linenos">13</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">MYSQL_PORT</span><span class="o">=</span><span class="m">3306</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">14</span><span class="w">    </span>mariadb:10
 </pre></div>
 </div>
 <p><a class="reference external" href="https://hub.docker.com/_/phpmyadmin">https://hub.docker.com/_/phpmyadmin</a></p>
@@ -151,40 +154,40 @@
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="nv">CONTAINER_NAME</span><span class="o">=</span><span class="s2">&quot;proxy-pma&quot;</span>
 <span class="linenos"> 4</span>
-<span class="linenos"> 5</span>docker run --tty --detach <span class="se">\</span>
-<span class="linenos"> 6</span>    --name <span class="s2">&quot;</span><span class="si">${</span><span class="nv">CONTAINER_NAME</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span>
-<span class="linenos"> 7</span>    --volume <span class="s2">&quot;</span><span class="si">${</span><span class="nv">DATA_PATH</span><span class="si">}</span><span class="s2">:/var/data&quot;</span> <span class="se">\</span>
-<span class="linenos"> 8</span>    --network <span class="s2">&quot;</span><span class="si">${</span><span class="nv">NETWORK_NAME</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span>
-<span class="linenos"> 9</span>    --restart unless-stopped <span class="se">\</span>
-<span class="linenos">10</span>    --env <span class="nv">TZ</span><span class="o">=</span>Europe/Amsterdam <span class="se">\</span>
-<span class="linenos">11</span>    --env <span class="nv">VIRTUAL_HOST</span><span class="o">=</span>pma.docker.test <span class="se">\</span>
-<span class="linenos">12</span>    --env <span class="nv">VIRTUAL_PORT</span><span class="o">=</span><span class="m">80</span> <span class="se">\</span>
-<span class="linenos">13</span>    --env <span class="nv">PMA_ARBITRARY</span><span class="o">=</span><span class="m">1</span> <span class="se">\</span>
-<span class="linenos">14</span>    --env <span class="nv">PMA_HOST</span><span class="o">=</span>proxy-mariadb10 <span class="se">\</span>
-<span class="linenos">15</span>    --env <span class="nv">PMA_USER</span><span class="o">=</span>root <span class="se">\</span>
-<span class="linenos">16</span>    --env <span class="nv">PMA_PASSWORD</span><span class="o">=</span>root <span class="se">\</span>
-<span class="linenos">17</span>    phpmyadmin:latest
+<span class="linenos"> 5</span>docker<span class="w"> </span>run<span class="w"> </span>--tty<span class="w"> </span>--detach<span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 6</span><span class="w">    </span>--name<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CONTAINER_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 7</span><span class="w">    </span>--volume<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">DATA_PATH</span><span class="si">}</span><span class="s2">:/var/data&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 8</span><span class="w">    </span>--network<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">NETWORK_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 9</span><span class="w">    </span>--restart<span class="w"> </span>unless-stopped<span class="w"> </span><span class="se">\</span>
+<span class="linenos">10</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">TZ</span><span class="o">=</span>Europe/Amsterdam<span class="w"> </span><span class="se">\</span>
+<span class="linenos">11</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">VIRTUAL_HOST</span><span class="o">=</span>pma.docker.test<span class="w"> </span><span class="se">\</span>
+<span class="linenos">12</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">VIRTUAL_PORT</span><span class="o">=</span><span class="m">80</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">13</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">PMA_ARBITRARY</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">14</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">PMA_HOST</span><span class="o">=</span>proxy-mariadb10<span class="w"> </span><span class="se">\</span>
+<span class="linenos">15</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">PMA_USER</span><span class="o">=</span>root<span class="w"> </span><span class="se">\</span>
+<span class="linenos">16</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">PMA_PASSWORD</span><span class="o">=</span>root<span class="w"> </span><span class="se">\</span>
+<span class="linenos">17</span><span class="w">    </span>phpmyadmin:latest
 </pre></div>
 </div>
 </section>
 <section id="postgresql-adminer">
-<h2>PostgreSQL &amp; Adminer<a class="headerlink" href="#postgresql-adminer" title="Permalink to this headline"></a></h2>
+<h2>PostgreSQL &amp; Adminer<a class="headerlink" href="#postgresql-adminer" title="Permalink to this heading"></a></h2>
 <p><a class="reference external" href="https://hub.docker.com/_/postgres">https://hub.docker.com/_/postgres</a></p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="ch">#!/usr/bin/env bash</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="nv">CONTAINER_NAME</span><span class="o">=</span><span class="s2">&quot;proxy-postgres13&quot;</span>
 <span class="linenos"> 4</span>
-<span class="linenos"> 5</span>docker run --tty --detach <span class="se">\</span>
-<span class="linenos"> 6</span>    --name <span class="s2">&quot;</span><span class="si">${</span><span class="nv">CONTAINER_NAME</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span>
-<span class="linenos"> 7</span>    --volume <span class="s2">&quot;proxy-data-pg13:/var/lib/postgresql/data&quot;</span> <span class="se">\</span>
-<span class="linenos"> 8</span>    --volume <span class="s2">&quot;</span><span class="si">${</span><span class="nv">DATA_PATH</span><span class="si">}</span><span class="s2">:/var/data&quot;</span> <span class="se">\</span>
-<span class="linenos"> 9</span>    --network <span class="s2">&quot;</span><span class="si">${</span><span class="nv">NETWORK_NAME</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span>
-<span class="linenos">10</span>    --restart unless-stopped <span class="se">\</span>
-<span class="linenos">11</span>    --env <span class="nv">TZ</span><span class="o">=</span>Europe/Amsterdam <span class="se">\</span>
-<span class="linenos">12</span>    --env <span class="nv">POSTGRES_USER</span><span class="o">=</span>root <span class="se">\</span>
-<span class="linenos">13</span>    --env <span class="nv">POSTGRES_PASSWORD</span><span class="o">=</span>root <span class="se">\</span>
-<span class="linenos">14</span>    --env <span class="nv">POSTGRES_PORT</span><span class="o">=</span><span class="m">5432</span> <span class="se">\</span>
-<span class="linenos">15</span>    postgres:13
+<span class="linenos"> 5</span>docker<span class="w"> </span>run<span class="w"> </span>--tty<span class="w"> </span>--detach<span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 6</span><span class="w">    </span>--name<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CONTAINER_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 7</span><span class="w">    </span>--volume<span class="w"> </span><span class="s2">&quot;proxy-data-pg13:/var/lib/postgresql/data&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 8</span><span class="w">    </span>--volume<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">DATA_PATH</span><span class="si">}</span><span class="s2">:/var/data&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 9</span><span class="w">    </span>--network<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">NETWORK_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">10</span><span class="w">    </span>--restart<span class="w"> </span>unless-stopped<span class="w"> </span><span class="se">\</span>
+<span class="linenos">11</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">TZ</span><span class="o">=</span>Europe/Amsterdam<span class="w"> </span><span class="se">\</span>
+<span class="linenos">12</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">POSTGRES_USER</span><span class="o">=</span>root<span class="w"> </span><span class="se">\</span>
+<span class="linenos">13</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">POSTGRES_PASSWORD</span><span class="o">=</span>root<span class="w"> </span><span class="se">\</span>
+<span class="linenos">14</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">POSTGRES_PORT</span><span class="o">=</span><span class="m">5432</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">15</span><span class="w">    </span>postgres:13
 </pre></div>
 </div>
 <p><a class="reference external" href="https://hub.docker.com/_/adminer">https://hub.docker.com/_/adminer</a></p>
@@ -192,37 +195,37 @@
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="nv">CONTAINER_NAME</span><span class="o">=</span><span class="s2">&quot;proxy-adminer&quot;</span>
 <span class="linenos"> 4</span>
-<span class="linenos"> 5</span>docker run --tty --detach <span class="se">\</span>
-<span class="linenos"> 6</span>    --name <span class="s2">&quot;</span><span class="si">${</span><span class="nv">CONTAINER_NAME</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span>
-<span class="linenos"> 7</span>    --volume <span class="s2">&quot;</span><span class="si">${</span><span class="nv">DATA_PATH</span><span class="si">}</span><span class="s2">:/var/data&quot;</span> <span class="se">\</span>
-<span class="linenos"> 8</span>    --network <span class="s2">&quot;</span><span class="si">${</span><span class="nv">NETWORK_NAME</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span>
-<span class="linenos"> 9</span>    --restart unless-stopped <span class="se">\</span>
-<span class="linenos">10</span>    --env <span class="nv">VIRTUAL_HOST</span><span class="o">=</span>adminer.docker.test <span class="se">\</span>
-<span class="linenos">11</span>    --env <span class="nv">VIRTUAL_PORT</span><span class="o">=</span><span class="m">8080</span> <span class="se">\</span>
-<span class="linenos">12</span>    --env <span class="nv">ADMINER_DEFAULT_SERVER</span><span class="o">=</span>proxy-postgres13 <span class="se">\</span>
-<span class="linenos">13</span>    --env <span class="nv">ADMINER_PLUGINS</span><span class="o">=</span><span class="s2">&quot;tables-filter tinymce edit-calendar&quot;</span> <span class="se">\</span>
-<span class="linenos">14</span>    --env <span class="nv">ADMINER_DESIGN</span><span class="o">=</span>rmsoft <span class="se">\</span>
-<span class="linenos">15</span>    adminer:latest
+<span class="linenos"> 5</span>docker<span class="w"> </span>run<span class="w"> </span>--tty<span class="w"> </span>--detach<span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 6</span><span class="w">    </span>--name<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CONTAINER_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 7</span><span class="w">    </span>--volume<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">DATA_PATH</span><span class="si">}</span><span class="s2">:/var/data&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 8</span><span class="w">    </span>--network<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">NETWORK_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 9</span><span class="w">    </span>--restart<span class="w"> </span>unless-stopped<span class="w"> </span><span class="se">\</span>
+<span class="linenos">10</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">VIRTUAL_HOST</span><span class="o">=</span>adminer.docker.test<span class="w"> </span><span class="se">\</span>
+<span class="linenos">11</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">VIRTUAL_PORT</span><span class="o">=</span><span class="m">8080</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">12</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">ADMINER_DEFAULT_SERVER</span><span class="o">=</span>proxy-postgres13<span class="w"> </span><span class="se">\</span>
+<span class="linenos">13</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">ADMINER_PLUGINS</span><span class="o">=</span><span class="s2">&quot;tables-filter tinymce edit-calendar&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">14</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">ADMINER_DESIGN</span><span class="o">=</span>rmsoft<span class="w"> </span><span class="se">\</span>
+<span class="linenos">15</span><span class="w">    </span>adminer:latest
 </pre></div>
 </div>
 </section>
 <section id="mongodb-commander">
-<h2>MongoDB &amp; Commander<a class="headerlink" href="#mongodb-commander" title="Permalink to this headline"></a></h2>
+<h2>MongoDB &amp; Commander<a class="headerlink" href="#mongodb-commander" title="Permalink to this heading"></a></h2>
 <p><a class="reference external" href="https://hub.docker.com/_/mongo">https://hub.docker.com/_/mongo</a></p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="ch">#!/usr/bin/env bash</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="nv">CONTAINER_NAME</span><span class="o">=</span><span class="s2">&quot;proxy-mongo5&quot;</span>
 <span class="linenos"> 4</span>
-<span class="linenos"> 5</span>docker run --tty --detach <span class="se">\</span>
-<span class="linenos"> 6</span>    --name <span class="s2">&quot;</span><span class="si">${</span><span class="nv">CONTAINER_NAME</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span>
-<span class="linenos"> 7</span>    --volume <span class="s2">&quot;proxy-data-mongo5:/data/db&quot;</span> <span class="se">\</span>
-<span class="linenos"> 8</span>    --volume <span class="s2">&quot;</span><span class="si">${</span><span class="nv">DATA_PATH</span><span class="si">}</span><span class="s2">:/var/data&quot;</span> <span class="se">\</span>
-<span class="linenos"> 9</span>    --network <span class="s2">&quot;</span><span class="si">${</span><span class="nv">NETWORK_NAME</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span>
-<span class="linenos">10</span>    --restart unless-stopped <span class="se">\</span>
-<span class="linenos">11</span>    --env <span class="nv">TZ</span><span class="o">=</span>Europe/Amsterdam <span class="se">\</span>
-<span class="linenos">12</span>    --env <span class="nv">MONGO_INITDB_ROOT_USERNAME</span><span class="o">=</span>root <span class="se">\</span>
-<span class="linenos">13</span>    --env <span class="nv">MONGO_INITDB_ROOT_PASSWORD</span><span class="o">=</span>root <span class="se">\</span>
-<span class="linenos">14</span>    mongo:5
+<span class="linenos"> 5</span>docker<span class="w"> </span>run<span class="w"> </span>--tty<span class="w"> </span>--detach<span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 6</span><span class="w">    </span>--name<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CONTAINER_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 7</span><span class="w">    </span>--volume<span class="w"> </span><span class="s2">&quot;proxy-data-mongo5:/data/db&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 8</span><span class="w">    </span>--volume<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">DATA_PATH</span><span class="si">}</span><span class="s2">:/var/data&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 9</span><span class="w">    </span>--network<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">NETWORK_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">10</span><span class="w">    </span>--restart<span class="w"> </span>unless-stopped<span class="w"> </span><span class="se">\</span>
+<span class="linenos">11</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">TZ</span><span class="o">=</span>Europe/Amsterdam<span class="w"> </span><span class="se">\</span>
+<span class="linenos">12</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">MONGO_INITDB_ROOT_USERNAME</span><span class="o">=</span>root<span class="w"> </span><span class="se">\</span>
+<span class="linenos">13</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">MONGO_INITDB_ROOT_PASSWORD</span><span class="o">=</span>root<span class="w"> </span><span class="se">\</span>
+<span class="linenos">14</span><span class="w">    </span>mongo:5
 </pre></div>
 </div>
 <p><a class="reference external" href="https://hub.docker.com/_/mongo-express">https://hub.docker.com/_/mongo-express</a></p>
@@ -230,41 +233,41 @@
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="nv">CONTAINER_NAME</span><span class="o">=</span><span class="s2">&quot;proxy-mongo-express&quot;</span>
 <span class="linenos"> 4</span>
-<span class="linenos"> 5</span>docker run --tty --detach <span class="se">\</span>
-<span class="linenos"> 6</span>    --name <span class="s2">&quot;</span><span class="si">${</span><span class="nv">CONTAINER_NAME</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span>
-<span class="linenos"> 7</span>    --volume <span class="s2">&quot;</span><span class="si">${</span><span class="nv">DATA_PATH</span><span class="si">}</span><span class="s2">:/var/data&quot;</span> <span class="se">\</span>
-<span class="linenos"> 8</span>    --network <span class="s2">&quot;</span><span class="si">${</span><span class="nv">NETWORK_NAME</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span>
-<span class="linenos"> 9</span>    --restart unless-stopped <span class="se">\</span>
-<span class="linenos">10</span>    --env <span class="nv">VIRTUAL_HOST</span><span class="o">=</span>mongo-express.docker.test <span class="se">\</span>
-<span class="linenos">11</span>    --env <span class="nv">VIRTUAL_PORT</span><span class="o">=</span><span class="m">8081</span> <span class="se">\</span>
-<span class="linenos">12</span>    --env <span class="nv">ME_CONFIG_MONGODB_ENABLE_ADMIN</span><span class="o">=</span><span class="nb">true</span> <span class="se">\</span>
-<span class="linenos">13</span>    --env <span class="nv">ME_CONFIG_MONGODB_SERVER</span><span class="o">=</span>proxy-mongo5 <span class="se">\</span>
-<span class="linenos">14</span>    --env <span class="nv">ME_CONFIG_MONGODB_PORT</span><span class="o">=</span><span class="m">27017</span> <span class="se">\</span>
-<span class="linenos">15</span>    --env <span class="nv">ME_CONFIG_BASICAUTH_USERNAME</span><span class="o">=</span>root <span class="se">\</span>
-<span class="linenos">16</span>    --env <span class="nv">ME_CONFIG_BASICAUTH_PASSWORD</span><span class="o">=</span>root <span class="se">\</span>
-<span class="linenos">17</span>    --env <span class="nv">ME_CONFIG_MONGODB_ADMINUSERNAME</span><span class="o">=</span>root <span class="se">\</span>
-<span class="linenos">18</span>    --env <span class="nv">ME_CONFIG_MONGODB_ADMINPASSWORD</span><span class="o">=</span>root <span class="se">\</span>
-<span class="linenos">19</span>    mongo-express:latest
+<span class="linenos"> 5</span>docker<span class="w"> </span>run<span class="w"> </span>--tty<span class="w"> </span>--detach<span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 6</span><span class="w">    </span>--name<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CONTAINER_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 7</span><span class="w">    </span>--volume<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">DATA_PATH</span><span class="si">}</span><span class="s2">:/var/data&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 8</span><span class="w">    </span>--network<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">NETWORK_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 9</span><span class="w">    </span>--restart<span class="w"> </span>unless-stopped<span class="w"> </span><span class="se">\</span>
+<span class="linenos">10</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">VIRTUAL_HOST</span><span class="o">=</span>mongo-express.docker.test<span class="w"> </span><span class="se">\</span>
+<span class="linenos">11</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">VIRTUAL_PORT</span><span class="o">=</span><span class="m">8081</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">12</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">ME_CONFIG_MONGODB_ENABLE_ADMIN</span><span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">13</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">ME_CONFIG_MONGODB_SERVER</span><span class="o">=</span>proxy-mongo5<span class="w"> </span><span class="se">\</span>
+<span class="linenos">14</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">ME_CONFIG_MONGODB_PORT</span><span class="o">=</span><span class="m">27017</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">15</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">ME_CONFIG_BASICAUTH_USERNAME</span><span class="o">=</span>root<span class="w"> </span><span class="se">\</span>
+<span class="linenos">16</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">ME_CONFIG_BASICAUTH_PASSWORD</span><span class="o">=</span>root<span class="w"> </span><span class="se">\</span>
+<span class="linenos">17</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">ME_CONFIG_MONGODB_ADMINUSERNAME</span><span class="o">=</span>root<span class="w"> </span><span class="se">\</span>
+<span class="linenos">18</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">ME_CONFIG_MONGODB_ADMINPASSWORD</span><span class="o">=</span>root<span class="w"> </span><span class="se">\</span>
+<span class="linenos">19</span><span class="w">    </span>mongo-express:latest
 </pre></div>
 </div>
 </section>
 <section id="redis-commander">
-<h2>Redis &amp; Commander<a class="headerlink" href="#redis-commander" title="Permalink to this headline"></a></h2>
+<h2>Redis &amp; Commander<a class="headerlink" href="#redis-commander" title="Permalink to this heading"></a></h2>
 <p><a class="reference external" href="https://hub.docker.com/_/redis">https://hub.docker.com/_/redis</a></p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="ch">#!/usr/bin/env bash</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="nv">CONTAINER_NAME</span><span class="o">=</span><span class="s2">&quot;proxy-redis5&quot;</span>
 <span class="linenos"> 4</span>
-<span class="linenos"> 5</span>docker run --tty --detach <span class="se">\</span>
-<span class="linenos"> 6</span>    --name <span class="s2">&quot;</span><span class="si">${</span><span class="nv">CONTAINER_NAME</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span>
-<span class="linenos"> 7</span>    --volume <span class="s2">&quot;proxy-data-redis5:/data&quot;</span> <span class="se">\</span>
-<span class="linenos"> 8</span>    --volume <span class="s2">&quot;</span><span class="si">${</span><span class="nv">DATA_PATH</span><span class="si">}</span><span class="s2">:/var/data&quot;</span> <span class="se">\</span>
-<span class="linenos"> 9</span>    --network <span class="s2">&quot;</span><span class="si">${</span><span class="nv">NETWORK_NAME</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span>
-<span class="linenos">10</span>    --restart unless-stopped <span class="se">\</span>
-<span class="linenos">11</span>    --env <span class="nv">TZ</span><span class="o">=</span>Europe/Amsterdam <span class="se">\</span>
-<span class="linenos">12</span>    --env <span class="nv">REDIS_PASSWORD</span><span class="o">=</span>root <span class="se">\</span>
-<span class="linenos">13</span>    --env <span class="nv">REDIS_PORT</span><span class="o">=</span><span class="m">6379</span> <span class="se">\</span>
-<span class="linenos">14</span>    redis:5 --appendonly yes
+<span class="linenos"> 5</span>docker<span class="w"> </span>run<span class="w"> </span>--tty<span class="w"> </span>--detach<span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 6</span><span class="w">    </span>--name<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CONTAINER_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 7</span><span class="w">    </span>--volume<span class="w"> </span><span class="s2">&quot;proxy-data-redis5:/data&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 8</span><span class="w">    </span>--volume<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">DATA_PATH</span><span class="si">}</span><span class="s2">:/var/data&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 9</span><span class="w">    </span>--network<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">NETWORK_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">10</span><span class="w">    </span>--restart<span class="w"> </span>unless-stopped<span class="w"> </span><span class="se">\</span>
+<span class="linenos">11</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">TZ</span><span class="o">=</span>Europe/Amsterdam<span class="w"> </span><span class="se">\</span>
+<span class="linenos">12</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">REDIS_PASSWORD</span><span class="o">=</span>root<span class="w"> </span><span class="se">\</span>
+<span class="linenos">13</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">REDIS_PORT</span><span class="o">=</span><span class="m">6379</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">14</span><span class="w">    </span>redis:5<span class="w"> </span>--appendonly<span class="w"> </span>yes
 </pre></div>
 </div>
 <p><a class="reference external" href="https://hub.docker.com/r/rediscommander/redis-commander">https://hub.docker.com/r/rediscommander/redis-commander</a></p>
@@ -272,39 +275,39 @@
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="nv">CONTAINER_NAME</span><span class="o">=</span><span class="s2">&quot;proxy-rediscommander&quot;</span>
 <span class="linenos"> 4</span>
-<span class="linenos"> 5</span>docker run --tty --detach <span class="se">\</span>
-<span class="linenos"> 6</span>    --name <span class="s2">&quot;</span><span class="si">${</span><span class="nv">CONTAINER_NAME</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span>
-<span class="linenos"> 7</span>    --volume <span class="s2">&quot;</span><span class="si">${</span><span class="nv">DATA_PATH</span><span class="si">}</span><span class="s2">:/var/data&quot;</span> <span class="se">\</span>
-<span class="linenos"> 8</span>    --network <span class="s2">&quot;</span><span class="si">${</span><span class="nv">NETWORK_NAME</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span>
-<span class="linenos"> 9</span>    --restart unless-stopped <span class="se">\</span>
-<span class="linenos">10</span>    --env <span class="nv">VIRTUAL_HOST</span><span class="o">=</span>redis-commander.docker.test <span class="se">\</span>
-<span class="linenos">11</span>    --env <span class="nv">VIRTUAL_PORT</span><span class="o">=</span><span class="m">8081</span> <span class="se">\</span>
-<span class="linenos">12</span>    --env <span class="nv">REDIS_HOST</span><span class="o">=</span>proxy-redis5 <span class="se">\</span>
-<span class="linenos">13</span>    --env <span class="nv">REDIS_PORT</span><span class="o">=</span><span class="m">6379</span> <span class="se">\</span>
-<span class="linenos">14</span>    --env <span class="nv">REDIS_PASSWORD</span><span class="o">=</span>root <span class="se">\</span>
-<span class="linenos">15</span>    rediscommander/redis-commander:latest
+<span class="linenos"> 5</span>docker<span class="w"> </span>run<span class="w"> </span>--tty<span class="w"> </span>--detach<span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 6</span><span class="w">    </span>--name<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CONTAINER_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 7</span><span class="w">    </span>--volume<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">DATA_PATH</span><span class="si">}</span><span class="s2">:/var/data&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 8</span><span class="w">    </span>--network<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">NETWORK_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 9</span><span class="w">    </span>--restart<span class="w"> </span>unless-stopped<span class="w"> </span><span class="se">\</span>
+<span class="linenos">10</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">VIRTUAL_HOST</span><span class="o">=</span>redis-commander.docker.test<span class="w"> </span><span class="se">\</span>
+<span class="linenos">11</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">VIRTUAL_PORT</span><span class="o">=</span><span class="m">8081</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">12</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">REDIS_HOST</span><span class="o">=</span>proxy-redis5<span class="w"> </span><span class="se">\</span>
+<span class="linenos">13</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">REDIS_PORT</span><span class="o">=</span><span class="m">6379</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">14</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">REDIS_PASSWORD</span><span class="o">=</span>root<span class="w"> </span><span class="se">\</span>
+<span class="linenos">15</span><span class="w">    </span>rediscommander/redis-commander:latest
 </pre></div>
 </div>
 </section>
 <section id="rabbitmq">
-<h2>RabbitMQ<a class="headerlink" href="#rabbitmq" title="Permalink to this headline"></a></h2>
+<h2>RabbitMQ<a class="headerlink" href="#rabbitmq" title="Permalink to this heading"></a></h2>
 <p><a class="reference external" href="https://hub.docker.com/_/rabbitmq">https://hub.docker.com/_/rabbitmq</a></p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="ch">#!/usr/bin/env bash</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="nv">CONTAINER_NAME</span><span class="o">=</span><span class="s2">&quot;proxy-rabbitmq&quot;</span>
 <span class="linenos"> 4</span>
-<span class="linenos"> 5</span>docker run --tty --detach <span class="se">\</span>
-<span class="linenos"> 6</span>    --name <span class="s2">&quot;</span><span class="si">${</span><span class="nv">CONTAINER_NAME</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span>
-<span class="linenos"> 7</span>    --hostname <span class="s2">&quot;rabbitmq.docker.test&quot;</span> <span class="se">\</span>
-<span class="linenos"> 8</span>    --volume <span class="s2">&quot;proxy-data-rabbitmq:/var/lib/rabbitmq&quot;</span> <span class="se">\</span>
-<span class="linenos"> 9</span>    --network <span class="s2">&quot;</span><span class="si">${</span><span class="nv">NETWORK_NAME</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span>
-<span class="linenos">10</span>    --restart unless-stopped <span class="se">\</span>
-<span class="linenos">11</span>    --env <span class="nv">TZ</span><span class="o">=</span>Europe/Amsterdam <span class="se">\</span>
-<span class="linenos">12</span>    --env <span class="nv">VIRTUAL_HOST</span><span class="o">=</span>rabbitmq.docker.test <span class="se">\</span>
-<span class="linenos">13</span>    --env <span class="nv">VIRTUAL_PORT</span><span class="o">=</span><span class="m">15672</span> <span class="se">\</span>
-<span class="linenos">14</span>    --env <span class="nv">RABBITMQ_DEFAULT_USER</span><span class="o">=</span>root <span class="se">\</span>
-<span class="linenos">15</span>    --env <span class="nv">RABBITMQ_DEFAULT_PASS</span><span class="o">=</span>root <span class="se">\</span>
-<span class="linenos">16</span>    rabbitmq:3.9-management
+<span class="linenos"> 5</span>docker<span class="w"> </span>run<span class="w"> </span>--tty<span class="w"> </span>--detach<span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 6</span><span class="w">    </span>--name<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CONTAINER_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 7</span><span class="w">    </span>--hostname<span class="w"> </span><span class="s2">&quot;rabbitmq.docker.test&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 8</span><span class="w">    </span>--volume<span class="w"> </span><span class="s2">&quot;proxy-data-rabbitmq:/var/lib/rabbitmq&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos"> 9</span><span class="w">    </span>--network<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">NETWORK_NAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">10</span><span class="w">    </span>--restart<span class="w"> </span>unless-stopped<span class="w"> </span><span class="se">\</span>
+<span class="linenos">11</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">TZ</span><span class="o">=</span>Europe/Amsterdam<span class="w"> </span><span class="se">\</span>
+<span class="linenos">12</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">VIRTUAL_HOST</span><span class="o">=</span>rabbitmq.docker.test<span class="w"> </span><span class="se">\</span>
+<span class="linenos">13</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">VIRTUAL_PORT</span><span class="o">=</span><span class="m">15672</span><span class="w"> </span><span class="se">\</span>
+<span class="linenos">14</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">RABBITMQ_DEFAULT_USER</span><span class="o">=</span>root<span class="w"> </span><span class="se">\</span>
+<span class="linenos">15</span><span class="w">    </span>--env<span class="w"> </span><span class="nv">RABBITMQ_DEFAULT_PASS</span><span class="o">=</span>root<span class="w"> </span><span class="se">\</span>
+<span class="linenos">16</span><span class="w">    </span>rabbitmq:3.9-management
 </pre></div>
 </div>
 </section>

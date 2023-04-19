@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Installation &amp; Update &mdash;  1.0.0 documentation</title>
@@ -14,9 +14,8 @@
   <![endif]-->
   
         <script data-url_root="../../" id="documentation_options" src="../../static/documentation_options.js"></script>
-        <script src="../../static/jquery.js"></script>
-        <script src="../../static/underscore.js"></script>
         <script src="../../static/doctools.js"></script>
+        <script src="../../static/sphinx_highlight.js"></script>
     <script src="../../static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -29,12 +28,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> 
-            <img src="../../static/cogs_v3_256.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            
+              <img src="../../static/cogs_v3_256.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -80,9 +83,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="index.html">Docker-Proxy-Stack</a> &raquo;</li>
-      <li>Installation &amp; Update</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Docker-Proxy-Stack</a></li>
+      <li class="breadcrumb-item active">Installation &amp; Update</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -92,13 +95,13 @@
            <div itemprop="articleBody">
              
   <section id="installation-update">
-<span id="docs-docker-proxy-installation"></span><h1>Installation &amp; Update<a class="headerlink" href="#installation-update" title="Permalink to this headline"></a></h1>
+<span id="docs-docker-proxy-installation"></span><h1>Installation &amp; Update<a class="headerlink" href="#installation-update" title="Permalink to this heading"></a></h1>
 <p>To make sure, anything will run fine, a unix based system is necessary. Things might work on Windows, too, but it was
 never tested to do so.</p>
-<p>You will also need <code class="docutils literal notranslate"><span class="pre">docker</span></code>, <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code>, <code class="docutils literal notranslate"><span class="pre">openssl</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span></code> and a bash on you local machine. As all tasks
+<p>You will also need <code class="docutils literal notranslate"><span class="pre">docker</span></code>, <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code>, <code class="docutils literal notranslate"><span class="pre">openssl</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span></code> and a bash on your local machine. As all tasks
 are made for bash, a zsh or similar shells will work, too.</p>
 <section id="first-setup">
-<h2>First setup<a class="headerlink" href="#first-setup" title="Permalink to this headline"></a></h2>
+<h2>First setup<a class="headerlink" href="#first-setup" title="Permalink to this heading"></a></h2>
 <p>Clone the repository somewhere to your machine. Make a copy of the <code class="docutils literal notranslate"><span class="pre">.env.template</span></code> and save it as <code class="docutils literal notranslate"><span class="pre">.env</span></code> into the
 same folder. (Windows uses a different <code class="docutils literal notranslate"><span class="pre">SOCKET_PATH</span></code>, all other variables should be fine.)</p>
 <div class="admonition note">
@@ -110,45 +113,48 @@ configuration.</p>
 <code class="docutils literal notranslate"><span class="pre">chmod</span> <span class="pre">+x</span> <span class="pre">DockerExec</span></code>. You should also create a softlink or alias for <code class="docutils literal notranslate"><span class="pre">DockerExec</span></code>, e.g.
 <code class="docutils literal notranslate"><span class="pre">ln</span> <span class="pre">-s</span> <span class="pre">/path/to/this/docker-proxy/DockerExec</span> <span class="pre">/home/$USER/.local/bin/DockerExec</span></code>.</p>
 <p>If the shell script was installed correctly, type <code class="docutils literal notranslate"><span class="pre">DockerExec</span> <span class="pre">help</span></code> to get a list of tasks, the script can do for you.</p>
-<p>You need to belong to the <code class="docutils literal notranslate"><span class="pre">sudo</span></code> group, as <code class="docutils literal notranslate"><span class="pre">DockerExec</span></code> has to update your <code class="docutils literal notranslate"><span class="pre">/etc/hosts</span></code> file, in order to match
-the network for your projects.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You need to belong to the <code class="docutils literal notranslate"><span class="pre">sudo</span></code> group, as <code class="docutils literal notranslate"><span class="pre">DockerExec</span></code> has to update your <code class="docutils literal notranslate"><span class="pre">/etc/hosts</span></code> file, in order to
+match the network for your projects.</p>
+</div>
 <p>Run <code class="docutils literal notranslate"><span class="pre">DockerExec</span> <span class="pre">init-certs</span></code> and follow the prompts. This should create multiple certificates in the <code class="docutils literal notranslate"><span class="pre">certs</span></code> folder,
 containing a <code class="docutils literal notranslate"><span class="pre">rootCA.crt</span></code>. Any info you type into the prompts is optional. In the next step, you have to register
 this self-signed certificate to your default browser(s).</p>
 <section id="using-the-proxy-stack-on-macos">
-<h3>Using the Proxy-Stack on MacOS<a class="headerlink" href="#using-the-proxy-stack-on-macos" title="Permalink to this headline"></a></h3>
+<h3>Using the Proxy-Stack on MacOS<a class="headerlink" href="#using-the-proxy-stack-on-macos" title="Permalink to this heading"></a></h3>
 <p>The library <code class="docutils literal notranslate"><span class="pre">realpath</span></code> is mandatory for <code class="docutils literal notranslate"><span class="pre">DockerExec</span></code> to work with local files. You have to install the <code class="docutils literal notranslate"><span class="pre">coreutils</span></code>
 to get that library. With Homebrew installed, use <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">coreutils</span></code>.</p>
 <p>Read further on <a class="reference external" href="https://brew.sh/">how to install Homebrew</a>.</p>
 </section>
 <section id="install-the-rootca-to-firefox">
-<h3>Install the rootCA to Firefox<a class="headerlink" href="#install-the-rootca-to-firefox" title="Permalink to this headline"></a></h3>
+<h3>Install the rootCA to Firefox<a class="headerlink" href="#install-the-rootca-to-firefox" title="Permalink to this heading"></a></h3>
 <p>Go to <code class="docutils literal notranslate"><span class="pre">Settings</span> <span class="pre">-&gt;</span> <span class="pre">Security</span></code> and scroll to the bottom, then click <code class="docutils literal notranslate"><span class="pre">Show</span> <span class="pre">Certificates</span></code>. In the tab
 <code class="docutils literal notranslate"><span class="pre">certificate</span> <span class="pre">authorities</span></code> click <code class="docutils literal notranslate"><span class="pre">import</span></code>, navigate to the aforementioned <code class="docutils literal notranslate"><span class="pre">/certs</span></code> folder and select <code class="docutils literal notranslate"><span class="pre">rootCA.crt</span></code>
 to import. Select both checkboxes and confirm.</p>
 </section>
 <section id="install-the-rootca-to-chrome-or-chromium">
-<h3>Install the rootCA to Chrome or Chromium<a class="headerlink" href="#install-the-rootca-to-chrome-or-chromium" title="Permalink to this headline"></a></h3>
+<h3>Install the rootCA to Chrome or Chromium<a class="headerlink" href="#install-the-rootca-to-chrome-or-chromium" title="Permalink to this heading"></a></h3>
 <p>In <code class="docutils literal notranslate"><span class="pre">Settings</span> <span class="pre">-&gt;</span> <span class="pre">Manage</span> <span class="pre">certificates</span> <span class="pre">-&gt;</span> <span class="pre">Authorities</span></code>. Navigate to the aforementioned <code class="docutils literal notranslate"><span class="pre">/certs</span></code> folder and select
 <code class="docutils literal notranslate"><span class="pre">rootCA.crt</span></code> to import.</p>
 <p>This also works for Opera or Vivaldi browsers.</p>
 </section>
 </section>
 <section id="docker-proxy-stack-update">
-<h2>Docker-Proxy-Stack Update<a class="headerlink" href="#docker-proxy-stack-update" title="Permalink to this headline"></a></h2>
+<h2>Docker-Proxy-Stack Update<a class="headerlink" href="#docker-proxy-stack-update" title="Permalink to this heading"></a></h2>
 <p>Once your Docker Proxy setup is finished, you can update the script with following steps:</p>
 <ol class="arabic simple">
 <li><p>Simply use <code class="docutils literal notranslate"><span class="pre">DockerExec</span> <span class="pre">self-update</span></code>.</p></li>
-<li><p>read new release notes</p></li>
+<li><p>Read new release notes</p></li>
 </ol>
 </section>
 <section id="manual-update">
-<h2>Manual update<a class="headerlink" href="#manual-update" title="Permalink to this headline"></a></h2>
+<h2>Manual update<a class="headerlink" href="#manual-update" title="Permalink to this heading"></a></h2>
 <p>In case the automated update did not work, try this:</p>
 <p>In the root directory of this repository</p>
 <ol class="arabic simple">
-<li><p>run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span> <span class="pre">--tags</span> <span class="pre">&amp;&amp;</span> <span class="pre">REVLIST=$(git</span> <span class="pre">rev-list</span> <span class="pre">--tags</span> <span class="pre">--max-count=1)</span> <span class="pre">&amp;&amp;</span> <span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">$(git</span> <span class="pre">describe</span> <span class="pre">--tags</span> <span class="pre">$REVLIST)</span></code></p></li>
-<li><p>read new release notes</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span> <span class="pre">--tags</span> <span class="pre">&amp;&amp;</span> <span class="pre">REVLIST=$(git</span> <span class="pre">rev-list</span> <span class="pre">--tags</span> <span class="pre">--max-count=1)</span> <span class="pre">&amp;&amp;</span> <span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">$(git</span> <span class="pre">describe</span> <span class="pre">--tags</span> <span class="pre">$REVLIST)</span></code></p></li>
+<li><p>Read new release notes</p></li>
 </ol>
 </section>
 </section>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>How to use the bridge &mdash;  1.0.0 documentation</title>
@@ -14,9 +14,8 @@
   <![endif]-->
   
         <script data-url_root="../../" id="documentation_options" src="../../static/documentation_options.js"></script>
-        <script src="../../static/jquery.js"></script>
-        <script src="../../static/underscore.js"></script>
         <script src="../../static/doctools.js"></script>
+        <script src="../../static/sphinx_highlight.js"></script>
     <script src="../../static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -28,12 +27,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> 
-            <img src="../../static/cogs_v3_256.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            
+              <img src="../../static/cogs_v3_256.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -68,9 +71,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="index.html">Mezzio: Symfony-Messenger-Bridge</a> &raquo;</li>
-      <li>How to use the bridge</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Mezzio: Symfony-Messenger-Bridge</a></li>
+      <li class="breadcrumb-item active">How to use the bridge</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -80,7 +83,7 @@
            <div itemprop="articleBody">
              
   <section id="how-to-use-the-bridge">
-<span id="docs-mezzio-messenger-how-to"></span><h1>How to use the bridge<a class="headerlink" href="#how-to-use-the-bridge" title="Permalink to this headline"></a></h1>
+<span id="docs-mezzio-messenger-how-to"></span><h1>How to use the bridge<a class="headerlink" href="#how-to-use-the-bridge" title="Permalink to this heading"></a></h1>
 <p>The main usage for a message bus is the asynchronous handling of tasks from so called ‘workers’ or ‘handlers’ (Symfony).
 Therefore a value object (message) is dispatched on a bus. A worker is specified to handle this message (asynchronously
 or syncronously). This prevents long running jobs from blocking a response for the user, if we stick to the http
@@ -197,7 +200,7 @@ be added by Symfony’s middleware and indicates the successful delegation to a 
 </pre></div>
 </div>
 <section id="asynchronous-message-consuming">
-<h2>Asynchronous message consuming<a class="headerlink" href="#asynchronous-message-consuming" title="Permalink to this headline"></a></h2>
+<h2>Asynchronous message consuming<a class="headerlink" href="#asynchronous-message-consuming" title="Permalink to this heading"></a></h2>
 <p>Taking the example above as granted, we now have at least one un-handled message in our broker (RabbitMQ, Database or
 Redis) that needs to be “consumed”. To handle this asynchronously, the package provides a <code class="docutils literal notranslate"><span class="pre">vendor/bin/message-bus</span></code>
 binary that is based on the <code class="docutils literal notranslate"><span class="pre">Symfony/Console</span></code> component. Try <code class="docutils literal notranslate"><span class="pre">php</span> <span class="pre">vendor/bin/message-bus</span></code> to list possible commands
@@ -208,7 +211,7 @@ from Symfony Docs</a> for making the consumer
 sustainable.</p>
 </section>
 <section id="using-the-logger">
-<h2>Using the Logger<a class="headerlink" href="#using-the-logger" title="Permalink to this headline"></a></h2>
+<h2>Using the Logger<a class="headerlink" href="#using-the-logger" title="Permalink to this heading"></a></h2>
 <p>With this package there is a Monolog service registered as ‘MessageBusLogger’ in the <code class="docutils literal notranslate"><span class="pre">Psr\Container</span></code> (Laminas Service
 Manager). You can use the service to write into the same log files, as the Symfony services do. Take a look on the
 ‘UnimportantWorker’ above for an example.</p>

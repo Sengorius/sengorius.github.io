@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Docker-Proxy-Stack &mdash;  1.0.0 documentation</title>
@@ -14,9 +14,8 @@
   <![endif]-->
   
         <script data-url_root="../../" id="documentation_options" src="../../static/documentation_options.js"></script>
-        <script src="../../static/jquery.js"></script>
-        <script src="../../static/underscore.js"></script>
         <script src="../../static/doctools.js"></script>
+        <script src="../../static/sphinx_highlight.js"></script>
     <script src="../../static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -29,12 +28,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> 
-            <img src="../../static/cogs_v3_256.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            
+              <img src="../../static/cogs_v3_256.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -73,8 +76,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Docker-Proxy-Stack</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Docker-Proxy-Stack</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -84,11 +87,11 @@
            <div itemprop="articleBody">
              
   <section id="docker-proxy-stack">
-<span id="docs-docker-proxy-index"></span><h1>Docker-Proxy-Stack<a class="headerlink" href="#docker-proxy-stack" title="Permalink to this headline"></a></h1>
+<span id="docs-docker-proxy-index"></span><h1>Docker-Proxy-Stack<a class="headerlink" href="#docker-proxy-stack" title="Permalink to this heading"></a></h1>
 <div class="toctree-wrapper compound" id="docs-docker-proxy-toc">
 </div>
 <section id="what-is-the-docker-proxy-stack">
-<h2>What is the Docker-Proxy-Stack?<a class="headerlink" href="#what-is-the-docker-proxy-stack" title="Permalink to this headline"></a></h2>
+<h2>What is the Docker-Proxy-Stack?<a class="headerlink" href="#what-is-the-docker-proxy-stack" title="Permalink to this heading"></a></h2>
 <p>The docker proxy stack is primarily a toolkit for local web development that supports</p>
 <ol class="arabic simple">
 <li><p>SSL (<code class="docutils literal notranslate"><span class="pre">https://</span></code>) for all local projects.</p></li>
@@ -108,7 +111,7 @@
 contributors.</p>
 <p><a class="reference internal" href="install.html#docs-docker-proxy-installation"><span class="std std-ref">» Take me to the installation part</span></a></p>
 <section id="so-why-do-we-do-all-this">
-<h3>So why do we do all this?<a class="headerlink" href="#so-why-do-we-do-all-this" title="Permalink to this headline"></a></h3>
+<h3>So why do we do all this?<a class="headerlink" href="#so-why-do-we-do-all-this" title="Permalink to this heading"></a></h3>
 <p>If you are running multiple web applications on one machine at the same time you are running into a couple of issues.
 If your projects are already dockerized, every <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code> file will</p>
 <ul class="simple">
@@ -128,12 +131,15 @@ If your projects are already dockerized, every <code class="docutils literal not
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The only requirement is to use the DockerExec shell script and have docker and docker-compose installed.</p>
+<p>The only requirement is to use the DockerExec shell script and have <code class="docutils literal notranslate"><span class="pre">git</span></code>, <code class="docutils literal notranslate"><span class="pre">docker</span></code> and <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code>
+installed.</p>
+<p>As of v2.1.0 the “docker compose” extension can also be used and the “docker-compose” binary is not necessary
+anymore.</p>
 </div>
 </section>
 </section>
 <section id="how-does-the-proxy-stack-work">
-<span id="docs-docker-proxy-how-it-works"></span><h2>How does the Proxy-Stack work?<a class="headerlink" href="#how-does-the-proxy-stack-work" title="Permalink to this headline"></a></h2>
+<span id="docs-docker-proxy-how-it-works"></span><h2>How does the Proxy-Stack work?<a class="headerlink" href="#how-does-the-proxy-stack-work" title="Permalink to this heading"></a></h2>
 <p>We first started with a basic <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code> setup of MySQL, PostgreSQL, Redis, Adminer and PhpMyAdmin. This setup
 was pretty static and not really extensible, as the compose file was comitted to the repository. This also limited the
 possibility to configure those five containers or even swap versions. If you wanted to change <code class="docutils literal notranslate"><span class="pre">mysql:5.7</span></code> image to a
@@ -152,35 +158,35 @@ from (multiple) <code class="docutils literal notranslate"><span class="pre">doc
 </div>
 </section>
 <section id="how-to-add-projects-to-the-docker-proxy-network">
-<h2>How to add Projects to the Docker Proxy Network<a class="headerlink" href="#how-to-add-projects-to-the-docker-proxy-network" title="Permalink to this headline"></a></h2>
+<h2>How to add Projects to the Docker Proxy Network<a class="headerlink" href="#how-to-add-projects-to-the-docker-proxy-network" title="Permalink to this heading"></a></h2>
 <p>The main goal here is to add multiple projects, that are dockerized, to the same proxy network. For a documentation on
 how to resolve URLs to a specific docker container, please read
 <a class="reference external" href="https://github.com/nginx-proxy/nginx-proxy">the nginx-proxy documentation</a>.</p>
 <ol class="arabic">
 <li><p><code class="docutils literal notranslate"><span class="pre">DockerExec</span></code> expects a <code class="docutils literal notranslate"><span class="pre">docker-compose.proxy.y(a)ml</span></code> file that contains services you might need for your project.
 You may configure some NGINX like this:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nginx</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx:latest</span><span class="w"></span>
-<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${CON_PREFIX}-web</span><span class="w"></span>
-<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.:/var/www/html</span><span class="w"></span>
-<span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="c1"># choose a docker.test subdomain</span><span class="w"></span>
-<span class="w">        </span><span class="nt">VIRTUAL_HOST</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-project.docker.test</span><span class="w"></span>
-<span class="w">        </span><span class="nt">VIRTUAL_PORT</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">443</span><span class="w"></span>
-<span class="w">        </span><span class="nt">VIRTUAL_PROTO</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nginx</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx:latest</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${CON_PREFIX}-web</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.:/var/www/html</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">        </span><span class="c1"># choose a docker.test subdomain</span>
+<span class="w">        </span><span class="nt">VIRTUAL_HOST</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-project.docker.test</span>
+<span class="w">        </span><span class="nt">VIRTUAL_PORT</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">443</span>
+<span class="w">        </span><span class="nt">VIRTUAL_PROTO</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">my-project</span></code> should be your project name.</p>
 </li>
 <li><p>Specify the Docker network you created above in <code class="docutils literal notranslate"><span class="pre">docker-compose.proxy.y(a)ml</span></code>:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">services</span><span class="p">:</span><span class="w"></span>
-<span class="w">   </span><span class="c1"># ...</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">services</span><span class="p">:</span>
+<span class="w">   </span><span class="c1"># ...</span>
 
-<span class="nt">networks</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
-<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${NETWORK_NAME}</span><span class="w"></span>
+<span class="nt">networks</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">default</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${NETWORK_NAME}</span>
 </pre></div>
 </div>
 </li>

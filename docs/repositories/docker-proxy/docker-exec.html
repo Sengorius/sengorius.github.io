@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DockerExec &mdash;  1.0.0 documentation</title>
@@ -14,9 +14,8 @@
   <![endif]-->
   
         <script data-url_root="../../" id="documentation_options" src="../../static/documentation_options.js"></script>
-        <script src="../../static/jquery.js"></script>
-        <script src="../../static/underscore.js"></script>
         <script src="../../static/doctools.js"></script>
+        <script src="../../static/sphinx_highlight.js"></script>
     <script src="../../static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -29,12 +28,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> 
-            <img src="../../static/cogs_v3_256.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            
+              <img src="../../static/cogs_v3_256.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -77,9 +80,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="index.html">Docker-Proxy-Stack</a> &raquo;</li>
-      <li>DockerExec</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Docker-Proxy-Stack</a></li>
+      <li class="breadcrumb-item active">DockerExec</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -89,11 +92,11 @@
            <div itemprop="articleBody">
              
   <section id="dockerexec">
-<span id="docs-docker-proxy-dockerexec"></span><h1>DockerExec<a class="headerlink" href="#dockerexec" title="Permalink to this headline"></a></h1>
+<span id="docs-docker-proxy-dockerexec"></span><h1>DockerExec<a class="headerlink" href="#dockerexec" title="Permalink to this heading"></a></h1>
 <p>To simplify most of the aforementioned tasks and add additional functionality for usual interactions with the
 Docker-Proxy-Stack, we provice the Bash script <code class="docutils literal notranslate"><span class="pre">DockerExec</span></code>.</p>
 <section id="advantages">
-<h2>Advantages<a class="headerlink" href="#advantages" title="Permalink to this headline"></a></h2>
+<h2>Advantages<a class="headerlink" href="#advantages" title="Permalink to this heading"></a></h2>
 <ol class="arabic simple">
 <li><p>Concise commands for Docker and Docker-Compose.</p></li>
 <li><p>Perform additional tasks like stopping all local Docker containers or remove old image layers.</p></li>
@@ -101,16 +104,18 @@ Docker-Proxy-Stack, we provice the Bash script <code class="docutils literal not
 <li><p>Synchronize the containers <code class="docutils literal notranslate"><span class="pre">/etc/hosts</span></code> files automatically.</p></li>
 <li><p>Starting up a project will print the projects domain to your command line.</p></li>
 <li><p>Helps with “spawning” new global containers for the network.</p></li>
+<li><p>Helps with the import of database files into running MySQL/PostgreSQL containers.</p></li>
 </ol>
 </section>
 <section id="how-to-use-dockerexec">
-<h2>How to use DockerExec?<a class="headerlink" href="#how-to-use-dockerexec" title="Permalink to this headline"></a></h2>
+<h2>How to use DockerExec?<a class="headerlink" href="#how-to-use-dockerexec" title="Permalink to this heading"></a></h2>
 <ol class="arabic simple">
+<li><p>Install and configure this project.</p></li>
 <li><p>Try and follow <code class="docutils literal notranslate"><span class="pre">DockerExec</span> <span class="pre">help</span></code> for a list of commands.</p></li>
 </ol>
 </section>
 <section id="limitations-of-dockerexec">
-<h2>Limitations of DockerExec<a class="headerlink" href="#limitations-of-dockerexec" title="Permalink to this headline"></a></h2>
+<h2>Limitations of DockerExec<a class="headerlink" href="#limitations-of-dockerexec" title="Permalink to this heading"></a></h2>
 <p>At this point some variables and configuration are hard coded and have to be set manually for a new project.
 You also need Bash. <code class="docutils literal notranslate"><span class="pre">/bin/sh</span></code> will not suffice.</p>
 <ol class="arabic simple">
@@ -121,11 +126,15 @@ You also need Bash. <code class="docutils literal notranslate"><span class="pre"
 </ul>
 </li>
 <li><p>You have to provide a <code class="docutils literal notranslate"><span class="pre">.env</span></code> file in your project root to set necessary variables. A best practice would be to
-have a version-controlled <code class="docutils literal notranslate"><span class="pre">.env.template</span></code> which you copy over to <code class="docutils literal notranslate"><span class="pre">.env</span></code> and customize on deployment.</p></li>
+have a version-controlled <code class="docutils literal notranslate"><span class="pre">.env.template</span></code> which you copy over to <code class="docutils literal notranslate"><span class="pre">.env</span></code> and customize on deployment.</p>
+<ul class="simple">
+<li><p>As of v2.1.0 the projects default <code class="docutils literal notranslate"><span class="pre">.env</span></code> file name can be configured in the Proxy’s <code class="docutils literal notranslate"><span class="pre">.env</span></code> configuration file</p></li>
+</ul>
+</li>
 </ol>
 </section>
 <section id="spawn-global-network-containers">
-<span id="docs-docker-proxy-spawn-instructions"></span><h2>Spawn global network containers<a class="headerlink" href="#spawn-global-network-containers" title="Permalink to this headline"></a></h2>
+<span id="docs-docker-proxy-spawn-instructions"></span><h2>Spawn global network containers<a class="headerlink" href="#spawn-global-network-containers" title="Permalink to this heading"></a></h2>
 <p>Having the Docker-Proxy-Stack installed, you are still missing services. With its new configuration in v2, the only
 container that is ensured on every init is the NGINX proxy, which will allow the basics. If you like to start a MySQL
 database with your stack, you have to “spawn” and enable this container first. To do that, the
@@ -145,40 +154,35 @@ directory, you can use the <code class="docutils literal notranslate"><span clas
 in mind to restart the Proxy-Stack, so the changes can take effect.</p>
 </section>
 <section id="a-minimal-configuration-for-php">
-<h2>A Minimal Configuration for PHP<a class="headerlink" href="#a-minimal-configuration-for-php" title="Permalink to this headline"></a></h2>
+<span id="docs-docker-proxy-minimal-config-php"></span><h2>A Minimal Configuration for PHP<a class="headerlink" href="#a-minimal-configuration-for-php" title="Permalink to this heading"></a></h2>
 <p>Some environment variables cannot be read from the <code class="docutils literal notranslate"><span class="pre">.env</span></code> file and have to be manually added to the container under
 <code class="docutils literal notranslate"><span class="pre">environment</span></code>. E.g. the domain name.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># docker-compose.proxy.yml</span><span class="w"></span>
-<span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3.5&#39;</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># docker-compose.proxy.yml</span>
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">web</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${WEB_IMAGE}</span>
+<span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${CON_PREFIX}-web</span>
+<span class="w">        </span><span class="nt">env_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.env</span>
+<span class="w">        </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.:/var/www/html</span>
+<span class="w">        </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">VIRTUAL_HOST</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-project.docker.test</span>
+<span class="w">            </span><span class="nt">VIRTUAL_PORT</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">443</span>
+<span class="w">            </span><span class="nt">VIRTUAL_PROTO</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https</span>
+<span class="w">        </span><span class="nt">links</span><span class="p">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">php</span>
 
-<span class="nt">services</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">web</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${WEB_IMAGE}</span><span class="w"></span>
-<span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${CON_PREFIX}-web</span><span class="w"></span>
-<span class="w">        </span><span class="nt">env_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.env</span><span class="w"></span>
-<span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w"></span>
-<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.:/var/www/html</span><span class="w"></span>
-<span class="w">        </span><span class="nt">expose</span><span class="p">:</span><span class="w"></span>
-<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span><span class="w"></span>
-<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">443</span><span class="w"></span>
-<span class="w">        </span><span class="nt">environment</span><span class="p">:</span><span class="w"></span>
-<span class="w">            </span><span class="nt">VIRTUAL_HOST</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-project.docker.test</span><span class="w"></span>
-<span class="w">            </span><span class="nt">VIRTUAL_PORT</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">443</span><span class="w"></span>
-<span class="w">            </span><span class="nt">VIRTUAL_PROTO</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https</span><span class="w"></span>
-<span class="w">        </span><span class="nt">links</span><span class="p">:</span><span class="w"></span>
-<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">php</span><span class="w"></span>
+<span class="w">    </span><span class="nt">php</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${PHP_IMAGE}</span>
+<span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${CON_PREFIX}-app</span>
+<span class="w">        </span><span class="nt">env_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.env</span>
+<span class="w">        </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.:/var/www/html</span>
 
-<span class="w">    </span><span class="nt">php</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${PHP_IMAGE}</span><span class="w"></span>
-<span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${CON_PREFIX}-app</span><span class="w"></span>
-<span class="w">        </span><span class="nt">env_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.env</span><span class="w"></span>
-<span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w"></span>
-<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.:/var/www/html</span><span class="w"></span>
-
-<span class="nt">networks</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
-<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${NETWORK}</span><span class="w"></span>
+<span class="nt">networks</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">default</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${NETWORK}</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># .env
