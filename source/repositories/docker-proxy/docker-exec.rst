@@ -141,6 +141,39 @@ Some environment variables cannot be read from the ``.env`` file and have to be 
 These files can be created within any current directory with the ``DockerExec proxy generate ${project-name}`` command.
 See ``DockerExec help`` for better usage info.
 
+
+.. _docs_docker-proxy_headstarting-containers:
+
+Headstarting the Docker Containers
+----------------------------------
+
 Use the ``START_CONTAINER`` variable to define the container, that will be allocated with ``docker exec -it`` at the
 end of a ``DockerExec (dev|prod|proxy) start`` command. If ``START_CONTAINER=none`` is set, the ``docker exec`` will be
 omitted. If not defined, it falls back to search for the first container with ``-app`` suffix.
+
+If you like to use DockerExec commands within other shell scripts, e.g. starting multiple project with a single
+execution, the start container would be blocking further commands, if the current shell is adopted by the container tty.
+In this case, the variable ``INTERRUPT_START_CONTAINER`` will override the start container. Add an
+``export INTERRUPT_START_CONTAINER=yes`` to the top of your shell script, to prevent the ``docker exec`` like this.
+
+.. code-block:: shell
+
+   #!/usr/bin/env bash
+
+   ALL_PATHS=("/path/to/project1" "/path/to/project2" "/path/to/project3")
+   export INTERRUPT_START_CONTAINER=yes
+
+   for project in "${ALL_PATHS[@]}"; do
+       if [[ ! -d "$project" ]]; then
+           echo "No project found on $project!"
+           exit 1
+       fi
+
+       if [[ ! -f "$project/.env" ]] || [[ ! -f "$project/docker-compose.proxy.yaml" ]]; then
+           echo "Project on $project is not prepared for Docker-Proxy-Stack!"
+           exit 1
+       fi
+
+       cd "$project"
+       DockerExec proxy start
+   done
