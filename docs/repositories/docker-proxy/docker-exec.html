@@ -13,6 +13,8 @@
     <script src="../../static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="../../static/jquery.js"></script>
+        <script src="../../static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="../../" id="documentation_options" src="../../static/documentation_options.js"></script>
         <script src="../../static/doctools.js"></script>
         <script src="../../static/sphinx_highlight.js"></script>
@@ -53,6 +55,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#limitations-of-dockerexec">Limitations of DockerExec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spawn-global-network-containers">Spawn global network containers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#a-minimal-configuration-for-php">A Minimal Configuration for PHP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#headstarting-the-docker-containers">Headstarting the Docker Containers</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="mailcatching.html">E-Mail Catching</a></li>
@@ -216,9 +219,37 @@ POSTGRES_PASSWORD=root
 </div>
 <p>These files can be created within any current directory with the <code class="docutils literal notranslate"><span class="pre">DockerExec</span> <span class="pre">proxy</span> <span class="pre">generate</span> <span class="pre">${project-name}</span></code> command.
 See <code class="docutils literal notranslate"><span class="pre">DockerExec</span> <span class="pre">help</span></code> for better usage info.</p>
+</section>
+<section id="headstarting-the-docker-containers">
+<span id="docs-docker-proxy-headstarting-containers"></span><h2>Headstarting the Docker Containers<a class="headerlink" href="#headstarting-the-docker-containers" title="Permalink to this heading"></a></h2>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">START_CONTAINER</span></code> variable to define the container, that will be allocated with <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">exec</span> <span class="pre">-it</span></code> at the
 end of a <code class="docutils literal notranslate"><span class="pre">DockerExec</span> <span class="pre">(dev|prod|proxy)</span> <span class="pre">start</span></code> command. If <code class="docutils literal notranslate"><span class="pre">START_CONTAINER=none</span></code> is set, the <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">exec</span></code> will be
 omitted. If not defined, it falls back to search for the first container with <code class="docutils literal notranslate"><span class="pre">-app</span></code> suffix.</p>
+<p>If you like to use DockerExec commands within other shell scripts, e.g. starting multiple project with a single
+execution, the start container would be blocking further commands, if the current shell is adopted by the container tty.
+In this case, the variable <code class="docutils literal notranslate"><span class="pre">INTERRUPT_START_CONTAINER</span></code> will override the start container. Add an
+<code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">INTERRUPT_START_CONTAINER=yes</span></code> to the top of your shell script, to prevent the <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">exec</span></code> like this.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nv">ALL_PATHS</span><span class="o">=(</span><span class="s2">&quot;/path/to/project1&quot;</span><span class="w"> </span><span class="s2">&quot;/path/to/project2&quot;</span><span class="w"> </span><span class="s2">&quot;/path/to/project3&quot;</span><span class="o">)</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">INTERRUPT_START_CONTAINER</span><span class="o">=</span>yes
+
+<span class="k">for</span><span class="w"> </span>project<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">ALL_PATHS</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$project</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;No project found on </span><span class="nv">$project</span><span class="s2">!&quot;</span>
+<span class="w">        </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="w">    </span><span class="k">fi</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$project</span><span class="s2">/.env&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$project</span><span class="s2">/docker-compose.proxy.yaml&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Project on </span><span class="nv">$project</span><span class="s2"> is not prepared for Docker-Proxy-Stack!&quot;</span>
+<span class="w">        </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="w">    </span><span class="k">fi</span>
+
+<span class="w">    </span><span class="nb">cd</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$project</span><span class="s2">&quot;</span>
+<span class="w">    </span>DockerExec<span class="w"> </span>proxy<span class="w"> </span>start
+<span class="k">done</span>
+</pre></div>
+</div>
 </section>
 </section>
 
