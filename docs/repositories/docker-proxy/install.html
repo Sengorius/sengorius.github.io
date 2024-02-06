@@ -1,23 +1,25 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Installation &amp; Update &mdash;  1.0.0 documentation</title>
-      <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../static/additional.css" type="text/css" />
+  <title>Installation &amp; Update &mdash;  1.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../static/additional.css?v=567a0223" />
+
+  
     <link rel="shortcut icon" href="../../static/favicon.ico"/>
   <!--[if lt IE 9]>
     <script src="../../static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../static/jquery.js"></script>
-        <script src="../../static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../static/documentation_options.js"></script>
-        <script src="../../static/doctools.js"></script>
-        <script src="../../static/sphinx_highlight.js"></script>
+        <script src="../../static/jquery.js?v=5d32c60e"></script>
+        <script src="../../static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../static/documentation_options.js?v=c5e1e573"></script>
+        <script src="../../static/doctools.js?v=888ff710"></script>
+        <script src="../../static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -97,13 +99,13 @@
            <div itemprop="articleBody">
              
   <section id="installation-update">
-<span id="docs-docker-proxy-installation"></span><h1>Installation &amp; Update<a class="headerlink" href="#installation-update" title="Permalink to this heading"></a></h1>
+<span id="docs-docker-proxy-installation"></span><h1>Installation &amp; Update<a class="headerlink" href="#installation-update" title="Link to this heading"></a></h1>
 <p>To make sure, anything will run fine, a unix based system is necessary. Things might work on Windows, too, but it was
 never tested to do so.</p>
 <p>You will also need <code class="docutils literal notranslate"><span class="pre">docker</span></code>, <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code>, <code class="docutils literal notranslate"><span class="pre">openssl</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span></code> and a bash on your local machine. As all tasks
 are made for bash, a zsh or similar shells will work, too.</p>
 <section id="first-setup">
-<h2>First setup<a class="headerlink" href="#first-setup" title="Permalink to this heading"></a></h2>
+<h2>First setup<a class="headerlink" href="#first-setup" title="Link to this heading"></a></h2>
 <p>Clone the repository somewhere to your machine. Make a copy of the <code class="docutils literal notranslate"><span class="pre">.env.template</span></code> and save it as <code class="docutils literal notranslate"><span class="pre">.env</span></code> into the
 same folder. (Windows uses a different <code class="docutils literal notranslate"><span class="pre">SOCKET_PATH</span></code>, all other variables should be fine.)</p>
 <div class="admonition note">
@@ -124,26 +126,26 @@ match the network for your projects.</p>
 containing a <code class="docutils literal notranslate"><span class="pre">rootCA.crt</span></code>. Any info you type into the prompts is optional. In the next step, you have to register
 this self-signed certificate to your default browser(s).</p>
 <section id="using-the-proxy-stack-on-macos">
-<h3>Using the Proxy-Stack on MacOS<a class="headerlink" href="#using-the-proxy-stack-on-macos" title="Permalink to this heading"></a></h3>
+<h3>Using the Proxy-Stack on MacOS<a class="headerlink" href="#using-the-proxy-stack-on-macos" title="Link to this heading"></a></h3>
 <p>The library <code class="docutils literal notranslate"><span class="pre">realpath</span></code> is mandatory for <code class="docutils literal notranslate"><span class="pre">DockerExec</span></code> to work with local files. You have to install the <code class="docutils literal notranslate"><span class="pre">coreutils</span></code>
 to get that library. With Homebrew installed, use <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">coreutils</span></code>.</p>
 <p>Read further on <a class="reference external" href="https://brew.sh/">how to install Homebrew</a>.</p>
 </section>
 <section id="install-the-rootca-to-firefox">
-<h3>Install the rootCA to Firefox<a class="headerlink" href="#install-the-rootca-to-firefox" title="Permalink to this heading"></a></h3>
+<h3>Install the rootCA to Firefox<a class="headerlink" href="#install-the-rootca-to-firefox" title="Link to this heading"></a></h3>
 <p>Go to <code class="docutils literal notranslate"><span class="pre">Settings</span> <span class="pre">-&gt;</span> <span class="pre">Security</span></code> and scroll to the bottom, then click <code class="docutils literal notranslate"><span class="pre">Show</span> <span class="pre">Certificates</span></code>. In the tab
 <code class="docutils literal notranslate"><span class="pre">certificate</span> <span class="pre">authorities</span></code> click <code class="docutils literal notranslate"><span class="pre">import</span></code>, navigate to the aforementioned <code class="docutils literal notranslate"><span class="pre">/certs</span></code> folder and select <code class="docutils literal notranslate"><span class="pre">rootCA.crt</span></code>
 to import. Select both checkboxes and confirm.</p>
 </section>
 <section id="install-the-rootca-to-chrome-or-chromium">
-<h3>Install the rootCA to Chrome or Chromium<a class="headerlink" href="#install-the-rootca-to-chrome-or-chromium" title="Permalink to this heading"></a></h3>
+<h3>Install the rootCA to Chrome or Chromium<a class="headerlink" href="#install-the-rootca-to-chrome-or-chromium" title="Link to this heading"></a></h3>
 <p>In <code class="docutils literal notranslate"><span class="pre">Settings</span> <span class="pre">-&gt;</span> <span class="pre">Manage</span> <span class="pre">certificates</span> <span class="pre">-&gt;</span> <span class="pre">Authorities</span></code>. Navigate to the aforementioned <code class="docutils literal notranslate"><span class="pre">/certs</span></code> folder and select
 <code class="docutils literal notranslate"><span class="pre">rootCA.crt</span></code> to import.</p>
 <p>This also works for Opera or Vivaldi browsers.</p>
 </section>
 </section>
 <section id="docker-proxy-stack-update">
-<h2>Docker-Proxy-Stack Update<a class="headerlink" href="#docker-proxy-stack-update" title="Permalink to this heading"></a></h2>
+<h2>Docker-Proxy-Stack Update<a class="headerlink" href="#docker-proxy-stack-update" title="Link to this heading"></a></h2>
 <p>Once your Docker Proxy setup is finished, you can update the script with following steps:</p>
 <ol class="arabic simple">
 <li><p>Simply use <code class="docutils literal notranslate"><span class="pre">DockerExec</span> <span class="pre">self-update</span></code>.</p></li>
@@ -151,7 +153,7 @@ to import. Select both checkboxes and confirm.</p>
 </ol>
 </section>
 <section id="manual-update">
-<h2>Manual update<a class="headerlink" href="#manual-update" title="Permalink to this heading"></a></h2>
+<h2>Manual update<a class="headerlink" href="#manual-update" title="Link to this heading"></a></h2>
 <p>In case the automated update did not work, try this:</p>
 <p>In the root directory of this repository</p>
 <ol class="arabic simple">
@@ -172,7 +174,7 @@ to import. Select both checkboxes and confirm.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Sengorius.</p>
+    <p>&#169; Copyright 2024, Sengorius.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

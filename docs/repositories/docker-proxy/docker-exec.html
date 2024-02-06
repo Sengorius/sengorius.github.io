@@ -1,23 +1,25 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DockerExec &mdash;  1.0.0 documentation</title>
-      <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../static/additional.css" type="text/css" />
+  <title>DockerExec &mdash;  1.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../static/additional.css?v=567a0223" />
+
+  
     <link rel="shortcut icon" href="../../static/favicon.ico"/>
   <!--[if lt IE 9]>
     <script src="../../static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../static/jquery.js"></script>
-        <script src="../../static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../static/documentation_options.js"></script>
-        <script src="../../static/doctools.js"></script>
-        <script src="../../static/sphinx_highlight.js"></script>
+        <script src="../../static/jquery.js?v=5d32c60e"></script>
+        <script src="../../static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../static/documentation_options.js?v=c5e1e573"></script>
+        <script src="../../static/doctools.js?v=888ff710"></script>
+        <script src="../../static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -95,11 +97,11 @@
            <div itemprop="articleBody">
              
   <section id="dockerexec">
-<span id="docs-docker-proxy-dockerexec"></span><h1>DockerExec<a class="headerlink" href="#dockerexec" title="Permalink to this heading"></a></h1>
+<span id="docs-docker-proxy-dockerexec"></span><h1>DockerExec<a class="headerlink" href="#dockerexec" title="Link to this heading"></a></h1>
 <p>To simplify most of the aforementioned tasks and add additional functionality for usual interactions with the
 Docker-Proxy-Stack, we provice the Bash script <code class="docutils literal notranslate"><span class="pre">DockerExec</span></code>.</p>
 <section id="advantages">
-<h2>Advantages<a class="headerlink" href="#advantages" title="Permalink to this heading"></a></h2>
+<h2>Advantages<a class="headerlink" href="#advantages" title="Link to this heading"></a></h2>
 <ol class="arabic simple">
 <li><p>Concise commands for Docker and Docker-Compose.</p></li>
 <li><p>Perform additional tasks like stopping all local Docker containers or remove old image layers.</p></li>
@@ -111,14 +113,14 @@ Docker-Proxy-Stack, we provice the Bash script <code class="docutils literal not
 </ol>
 </section>
 <section id="how-to-use-dockerexec">
-<h2>How to use DockerExec?<a class="headerlink" href="#how-to-use-dockerexec" title="Permalink to this heading"></a></h2>
+<h2>How to use DockerExec?<a class="headerlink" href="#how-to-use-dockerexec" title="Link to this heading"></a></h2>
 <ol class="arabic simple">
 <li><p>Install and configure this project.</p></li>
 <li><p>Try and follow <code class="docutils literal notranslate"><span class="pre">DockerExec</span> <span class="pre">help</span></code> for a list of commands.</p></li>
 </ol>
 </section>
 <section id="limitations-of-dockerexec">
-<h2>Limitations of DockerExec<a class="headerlink" href="#limitations-of-dockerexec" title="Permalink to this heading"></a></h2>
+<h2>Limitations of DockerExec<a class="headerlink" href="#limitations-of-dockerexec" title="Link to this heading"></a></h2>
 <p>At this point some variables and configuration are hard coded and have to be set manually for a new project.
 You also need Bash. <code class="docutils literal notranslate"><span class="pre">/bin/sh</span></code> will not suffice.</p>
 <ol class="arabic simple">
@@ -137,7 +139,7 @@ have a version-controlled <code class="docutils literal notranslate"><span class
 </ol>
 </section>
 <section id="spawn-global-network-containers">
-<span id="docs-docker-proxy-spawn-instructions"></span><h2>Spawn global network containers<a class="headerlink" href="#spawn-global-network-containers" title="Permalink to this heading"></a></h2>
+<span id="docs-docker-proxy-spawn-instructions"></span><h2>Spawn global network containers<a class="headerlink" href="#spawn-global-network-containers" title="Link to this heading"></a></h2>
 <p>Having the Docker-Proxy-Stack installed, you are still missing services. With its new configuration in v2, the only
 container that is ensured on every init is the NGINX proxy, which will allow the basics. If you like to start a MySQL
 database with your stack, you have to “spawn” and enable this container first. To do that, the
@@ -157,7 +159,7 @@ directory, you can use the <code class="docutils literal notranslate"><span clas
 in mind to restart the Proxy-Stack, so the changes can take effect.</p>
 </section>
 <section id="a-minimal-configuration-for-php">
-<span id="docs-docker-proxy-minimal-config-php"></span><h2>A Minimal Configuration for PHP<a class="headerlink" href="#a-minimal-configuration-for-php" title="Permalink to this heading"></a></h2>
+<span id="docs-docker-proxy-minimal-config-php"></span><h2>A Minimal Configuration for PHP<a class="headerlink" href="#a-minimal-configuration-for-php" title="Link to this heading"></a></h2>
 <p>Some environment variables cannot be read from the <code class="docutils literal notranslate"><span class="pre">.env</span></code> file and have to be manually added to the container under
 <code class="docutils literal notranslate"><span class="pre">environment</span></code>. E.g. the domain name.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># docker-compose.proxy.yml</span>
@@ -171,9 +173,11 @@ in mind to restart the Proxy-Stack, so the changes can take effect.</p>
 <span class="w">        </span><span class="nt">environment</span><span class="p">:</span>
 <span class="w">            </span><span class="nt">VIRTUAL_HOST</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-project.docker.test</span>
 <span class="w">            </span><span class="nt">VIRTUAL_PORT</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">443</span>
-<span class="w">            </span><span class="nt">VIRTUAL_PROTO</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https</span>
-<span class="w">        </span><span class="nt">links</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">depends_on</span><span class="p">:</span>
 <span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">php</span>
+<span class="w">        </span><span class="nt">networks</span><span class="p">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">proxy</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local</span>
 
 <span class="w">    </span><span class="nt">php</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${PHP_IMAGE}</span>
@@ -181,11 +185,16 @@ in mind to restart the Proxy-Stack, so the changes can take effect.</p>
 <span class="w">        </span><span class="nt">env_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.env</span>
 <span class="w">        </span><span class="nt">volumes</span><span class="p">:</span>
 <span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.:/var/www/html</span>
+<span class="w">        </span><span class="nt">networks</span><span class="p">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local</span>
 
 <span class="nt">networks</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">default</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">proxy</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${NETWORK}</span>
+<span class="w">        </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+
+<span class="w">    </span><span class="nt">local</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bridge</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># .env
@@ -196,8 +205,8 @@ COMPOSE_CONVERT_WINDOWS_PATHS=1
 
 # docker-compose configuration
 CON_PREFIX=project # prefix name for the running docker container
-PHP_IMAGE={$CONTAINER_REGISTRY}/symfony/flex/php:7.4-fpm-dev
-WEB_IMAGE={$CONTAINER_REGISTRY}/symfony/flex/nginx:latest
+PHP_IMAGE={$CONTAINER_REGISTRY}/php-fpm:8.3
+WEB_IMAGE={$CONTAINER_REGISTRY}/nginx:latest
 NETWORK=nginx-proxy
 START_CONTAINER=project-app
 
@@ -217,11 +226,11 @@ POSTGRES_DB=my_project_db
 POSTGRES_PASSWORD=root
 </pre></div>
 </div>
-<p>These files can be created within any current directory with the <code class="docutils literal notranslate"><span class="pre">DockerExec</span> <span class="pre">proxy</span> <span class="pre">generate</span> <span class="pre">${project-name}</span></code> command.
+<p>These files can be created within any current directory using the <code class="docutils literal notranslate"><span class="pre">DockerExec</span> <span class="pre">proxy</span> <span class="pre">generate</span> <span class="pre">${project-name}</span></code> command.
 See <code class="docutils literal notranslate"><span class="pre">DockerExec</span> <span class="pre">help</span></code> for better usage info.</p>
 </section>
 <section id="headstarting-the-docker-containers">
-<span id="docs-docker-proxy-headstarting-containers"></span><h2>Headstarting the Docker Containers<a class="headerlink" href="#headstarting-the-docker-containers" title="Permalink to this heading"></a></h2>
+<span id="docs-docker-proxy-headstarting-containers"></span><h2>Headstarting the Docker Containers<a class="headerlink" href="#headstarting-the-docker-containers" title="Link to this heading"></a></h2>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">START_CONTAINER</span></code> variable to define the container, that will be allocated with <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">exec</span> <span class="pre">-it</span></code> at the
 end of a <code class="docutils literal notranslate"><span class="pre">DockerExec</span> <span class="pre">(dev|prod|proxy)</span> <span class="pre">start</span></code> command. If <code class="docutils literal notranslate"><span class="pre">START_CONTAINER=none</span></code> is set, the <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">exec</span></code> will be
 omitted. If not defined, it falls back to search for the first container with <code class="docutils literal notranslate"><span class="pre">-app</span></code> suffix.</p>
@@ -264,7 +273,7 @@ In this case, the variable <code class="docutils literal notranslate"><span clas
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Sengorius.</p>
+    <p>&#169; Copyright 2024, Sengorius.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -1,23 +1,25 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>E-Mail Catching &mdash;  1.0.0 documentation</title>
-      <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../static/additional.css" type="text/css" />
+  <title>E-Mail Catching &mdash;  1.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../static/additional.css?v=567a0223" />
+
+  
     <link rel="shortcut icon" href="../../static/favicon.ico"/>
   <!--[if lt IE 9]>
     <script src="../../static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../static/jquery.js"></script>
-        <script src="../../static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../static/documentation_options.js"></script>
-        <script src="../../static/doctools.js"></script>
-        <script src="../../static/sphinx_highlight.js"></script>
+        <script src="../../static/jquery.js?v=5d32c60e"></script>
+        <script src="../../static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../static/documentation_options.js?v=c5e1e573"></script>
+        <script src="../../static/doctools.js?v=888ff710"></script>
+        <script src="../../static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -91,18 +93,18 @@
            <div itemprop="articleBody">
              
   <section id="e-mail-catching">
-<span id="docs-docker-proxy-mailcatching"></span><h1>E-Mail Catching<a class="headerlink" href="#e-mail-catching" title="Permalink to this heading"></a></h1>
+<span id="docs-docker-proxy-mailcatching"></span><h1>E-Mail Catching<a class="headerlink" href="#e-mail-catching" title="Link to this heading"></a></h1>
 <p>This service was created to catch e-mails on the SMTP ports from any local source and display them in a simple viewer
 within a browser. You can read more about it <a class="reference external" href="https://github.com/Sengorius/proxy-mailcatcher">here</a>.</p>
 <p>To make this service part of the Proxy-Stack, use the <code class="docutils literal notranslate"><span class="pre">DockerExec</span> <span class="pre">spawn</span> <span class="pre">mailcatcher</span></code> command and follow the
 instructions. Don’t forget to restart the Proxy-Network, if done.</p>
 <p>Then configure the service in your projects. Current use-cases include mails sent by <strong>Symfony</strong> and <strong>WordPress</strong>.</p>
 <section id="symfony">
-<h2>Symfony<a class="headerlink" href="#symfony" title="Permalink to this heading"></a></h2>
+<h2>Symfony<a class="headerlink" href="#symfony" title="Link to this heading"></a></h2>
 <p>In your projects <code class="docutils literal notranslate"><span class="pre">.env</span></code> file set <code class="docutils literal notranslate"><span class="pre">MAILER_DSN=smtp://mailcatcher:25</span></code>. That’s it.</p>
 </section>
 <section id="wordpress">
-<h2>WordPress<a class="headerlink" href="#wordpress" title="Permalink to this heading"></a></h2>
+<h2>WordPress<a class="headerlink" href="#wordpress" title="Link to this heading"></a></h2>
 <p>Two options:</p>
 <ol class="arabic">
 <li><p>Install the Plugin <strong>WP Mail SMTP</strong>, use the option “Other SMTP” and set the variable “SMTP HOST” to <code class="docutils literal notranslate"><span class="pre">proxy-smtp</span></code>
@@ -154,7 +156,7 @@ and “SMTP Port” to <code class="docutils literal notranslate"><span class="p
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Sengorius.</p>
+    <p>&#169; Copyright 2024, Sengorius.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

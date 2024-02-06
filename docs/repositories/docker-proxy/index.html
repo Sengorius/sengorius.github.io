@@ -1,23 +1,25 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Docker-Proxy-Stack &mdash;  1.0.0 documentation</title>
-      <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../static/additional.css" type="text/css" />
+  <title>Docker-Proxy-Stack &mdash;  1.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../static/additional.css?v=567a0223" />
+
+  
     <link rel="shortcut icon" href="../../static/favicon.ico"/>
   <!--[if lt IE 9]>
     <script src="../../static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../static/jquery.js"></script>
-        <script src="../../static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../static/documentation_options.js"></script>
-        <script src="../../static/doctools.js"></script>
-        <script src="../../static/sphinx_highlight.js"></script>
+        <script src="../../static/jquery.js?v=5d32c60e"></script>
+        <script src="../../static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../static/documentation_options.js?v=c5e1e573"></script>
+        <script src="../../static/doctools.js?v=888ff710"></script>
+        <script src="../../static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -89,11 +91,11 @@
            <div itemprop="articleBody">
              
   <section id="docker-proxy-stack">
-<span id="docs-docker-proxy-index"></span><h1>Docker-Proxy-Stack<a class="headerlink" href="#docker-proxy-stack" title="Permalink to this heading"></a></h1>
+<span id="docs-docker-proxy-index"></span><h1>Docker-Proxy-Stack<a class="headerlink" href="#docker-proxy-stack" title="Link to this heading"></a></h1>
 <div class="toctree-wrapper compound" id="docs-docker-proxy-toc">
 </div>
 <section id="what-is-the-docker-proxy-stack">
-<h2>What is the Docker-Proxy-Stack?<a class="headerlink" href="#what-is-the-docker-proxy-stack" title="Permalink to this heading"></a></h2>
+<h2>What is the Docker-Proxy-Stack?<a class="headerlink" href="#what-is-the-docker-proxy-stack" title="Link to this heading"></a></h2>
 <p>The docker proxy stack is primarily a toolkit for local web development that supports</p>
 <ol class="arabic simple">
 <li><p>SSL (<code class="docutils literal notranslate"><span class="pre">https://</span></code>) for all local projects.</p></li>
@@ -113,7 +115,7 @@
 contributors.</p>
 <p><a class="reference internal" href="install.html#docs-docker-proxy-installation"><span class="std std-ref">» Take me to the installation part</span></a></p>
 <section id="so-why-do-we-do-all-this">
-<h3>So why do we do all this?<a class="headerlink" href="#so-why-do-we-do-all-this" title="Permalink to this heading"></a></h3>
+<h3>So why do we do all this?<a class="headerlink" href="#so-why-do-we-do-all-this" title="Link to this heading"></a></h3>
 <p>If you are running multiple web applications on one machine at the same time you are running into a couple of issues.
 If your projects are already dockerized, every <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code> file will</p>
 <ul class="simple">
@@ -141,7 +143,7 @@ anymore.</p>
 </section>
 </section>
 <section id="how-does-the-proxy-stack-work">
-<span id="docs-docker-proxy-how-it-works"></span><h2>How does the Proxy-Stack work?<a class="headerlink" href="#how-does-the-proxy-stack-work" title="Permalink to this heading"></a></h2>
+<span id="docs-docker-proxy-how-it-works"></span><h2>How does the Proxy-Stack work?<a class="headerlink" href="#how-does-the-proxy-stack-work" title="Link to this heading"></a></h2>
 <p>We first started with a basic <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code> setup of MySQL, PostgreSQL, Redis, Adminer and PhpMyAdmin. This setup
 was pretty static and not really extensible, as the compose file was comitted to the repository. This also limited the
 possibility to configure those five containers or even swap versions. If you wanted to change <code class="docutils literal notranslate"><span class="pre">mysql:5.7</span></code> image to a
@@ -160,7 +162,7 @@ from (multiple) <code class="docutils literal notranslate"><span class="pre">doc
 </div>
 </section>
 <section id="how-to-add-projects-to-the-docker-proxy-network">
-<h2>How to add Projects to the Docker Proxy Network<a class="headerlink" href="#how-to-add-projects-to-the-docker-proxy-network" title="Permalink to this heading"></a></h2>
+<h2>How to add Projects to the Docker Proxy Network<a class="headerlink" href="#how-to-add-projects-to-the-docker-proxy-network" title="Link to this heading"></a></h2>
 <p>The main goal here is to add multiple projects, that are dockerized, to the same proxy network. For a documentation on
 how to resolve URLs to a specific docker container, please read
 <a class="reference external" href="https://github.com/nginx-proxy/nginx-proxy">the nginx-proxy documentation</a>.</p>
@@ -198,6 +200,9 @@ You may configure some NGINX like this:</p>
 <p class="admonition-title">Note</p>
 <p>Both of these files can be automatically generated with <code class="docutils literal notranslate"><span class="pre">DockerExec</span> <span class="pre">proxy</span> <span class="pre">generate</span> <span class="pre">{project-name}</span></code>!</p>
 </div>
+<p>As the <code class="docutils literal notranslate"><span class="pre">--link</span></code> argument for <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code> and <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">compose</span></code> is deprecated, make sure to define bridge networks
+for duplicated containers with the same ports, e.g. MySQL. Take a closer look at the
+“<a class="reference internal" href="docker-exec.html#docs-docker-proxy-minimal-config-php"><span class="std std-ref">A Minimal Configuration for PHP</span></a>” chapter, to get an idea of how to configure the networks.</p>
 </section>
 </section>
 
@@ -212,7 +217,7 @@ You may configure some NGINX like this:</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Sengorius.</p>
+    <p>&#169; Copyright 2024, Sengorius.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
