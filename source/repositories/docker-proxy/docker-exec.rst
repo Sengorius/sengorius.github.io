@@ -92,9 +92,11 @@ Some environment variables cannot be read from the ``.env`` file and have to be 
            environment:
                VIRTUAL_HOST: my-project.docker.test
                VIRTUAL_PORT: 443
-               VIRTUAL_PROTO: https
-           links:
+           depends_on:
                - php
+           networks:
+               - proxy
+               - local
 
        php:
            image: ${PHP_IMAGE}
@@ -102,11 +104,16 @@ Some environment variables cannot be read from the ``.env`` file and have to be 
            env_file: .env
            volumes:
                - .:/var/www/html
+           networks:
+               - local
 
    networks:
-       default:
-           external: true
+       proxy:
            name: ${NETWORK}
+           external: true
+
+       local:
+           driver: bridge
 
 .. code-block::
 
@@ -118,8 +125,8 @@ Some environment variables cannot be read from the ``.env`` file and have to be 
 
    # docker-compose configuration
    CON_PREFIX=project # prefix name for the running docker container
-   PHP_IMAGE={$CONTAINER_REGISTRY}/symfony/flex/php:7.4-fpm-dev
-   WEB_IMAGE={$CONTAINER_REGISTRY}/symfony/flex/nginx:latest
+   PHP_IMAGE={$CONTAINER_REGISTRY}/php-fpm:8.3
+   WEB_IMAGE={$CONTAINER_REGISTRY}/nginx:latest
    NETWORK=nginx-proxy
    START_CONTAINER=project-app
 
@@ -138,7 +145,7 @@ Some environment variables cannot be read from the ``.env`` file and have to be 
    POSTGRES_DB=my_project_db
    POSTGRES_PASSWORD=root
 
-These files can be created within any current directory with the ``DockerExec proxy generate ${project-name}`` command.
+These files can be created within any current directory using the ``DockerExec proxy generate ${project-name}`` command.
 See ``DockerExec help`` for better usage info.
 
 

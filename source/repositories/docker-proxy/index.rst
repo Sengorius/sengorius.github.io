@@ -136,3 +136,7 @@ how to resolve URLs to a specific docker container, please read
 .. note::
 
    Both of these files can be automatically generated with ``DockerExec proxy generate {project-name}``!
+
+As the ``--link`` argument for ``docker run`` and ``docker compose`` is deprecated, make sure to define bridge networks
+for duplicated containers with the same ports, e.g. MySQL. Take a closer look at the
+":ref:`docs_docker-proxy_minimal-config-php`" chapter, to get an idea of how to configure the networks.
