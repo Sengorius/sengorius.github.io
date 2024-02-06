@@ -15,7 +15,7 @@ if [[ -d "$BASE_DIR/build" ]]; then
 fi
 
 # define docker container
-SPHINX_IMAGE=sengorius/sphinx:3
+SPHINX_IMAGE=registry.blawert.org/misc/docker-compose/sphinx:latest
 DOCKER_START="docker run --rm -u $(id -u):$(id -g) -v $BASE_DIR:/var/documentation -it $SPHINX_IMAGE"
 
 function fix_static_links() {
