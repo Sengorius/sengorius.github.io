@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Creating multilevel subdomain certificates &mdash;  1.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../static/additional.css?v=567a0223" />
+
+  
+    <link rel="shortcut icon" href="../../static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../static/jquery.js?v=5d32c60e"></script>
+        <script src="../../static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../static/documentation_options.js?v=c5e1e573"></script>
+        <script src="../../static/doctools.js?v=888ff710"></script>
+        <script src="../../static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Spawn Container Examples" href="spawn-examples.html" />
+    <link rel="prev" title="Docker-Proxy-Stack Upgrade instructions" href="upgrade-v2.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            
+              <img src="../../static/cogs_v3_256.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Docker-Proxy-Stack</a><ul class="current">
+<li class="toctree-l2"><a class="reference external" href="https://github.com/Sengorius/docker-proxy-stack">GitHub Repository</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installation &amp; Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker-exec.html">DockerExec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mailcatching.html">E-Mail Catching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="upgrade-v2.html">Docker-Proxy-Stack Upgrade instructions</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Creating multilevel subdomain certificates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spawn-examples.html">Spawn Container Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#what-is-the-docker-proxy-stack">What is the Docker-Proxy-Stack?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#how-does-the-proxy-stack-work">How does the Proxy-Stack work?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#how-to-add-projects-to-the-docker-proxy-network">How to add Projects to the Docker Proxy Network</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../simple-rest/index.html">Simple REST Bundle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mezzio-messenger/index.html">Mezzio: Symfony-Messenger-Bridge</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html"></a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Docker-Proxy-Stack</a></li>
+      <li class="breadcrumb-item active">Creating multilevel subdomain certificates</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="creating-multilevel-subdomain-certificates">
+<span id="docs-docker-proxy-multilevel-cert"></span><h1>Creating multilevel subdomain certificates<a class="headerlink" href="#creating-multilevel-subdomain-certificates" title="Link to this heading"></a></h1>
+<p>When generating the local docker.test certificate (using the <code class="docutils literal notranslate"><span class="pre">DockerExec</span> <span class="pre">do</span> <span class="pre">init-certs</span></code>) command, the local domains
+for development will be encrypted. The certificate is valid for any subdomain with the schema
+<a class="reference external" href="https://subdomain.docker.test">https://subdomain.docker.test</a> or even <a class="reference external" href="https://docker.test">https://docker.test</a> itself. However, for some projects you might need to have
+a mutilevel subdomain setup, like <a class="reference external" href="https://first.second.docker.test">https://first.second.docker.test</a>, which should also be secured with SSL.</p>
+<p>As it is not possible to create such mutilevel subdomain certificates directly, the solution is to create another
+subdomain certificate for second.docker.test and register it like the other one. Use the <code class="docutils literal notranslate"><span class="pre">DockerExec</span> <span class="pre">do</span> <span class="pre">add-cert</span></code>
+command to start the setup, answer the questions to create a self-signed certificate and enter the subdomain name
+(the “second” part as seen above) in the last question. You may also skip the most question by pressing enter.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt; $ DockerExec do add-cert
+
+You are about to create a multilevel wildcard cert. Please answer following questions:
+Define a key size [4096]:
+How long shall this certificate be valid (in days) [3650]:
+Country Name (2 letter code) [PS]:
+State or Province Name (full name) [Proxy Environment]:
+Locality Name (some city) [Proxy]:
+Organization Name (some company) [Docker Proxy Stack]:
+Organizational Unit Name (a section) [Docker Proxy Stack]:
+E-Mail Address []:
+Additional subdomain, e.g. &#39;example&#39; to create &#39;*.example.docker.test&#39; []: second
+</pre></div>
+</div>
+<p>Outputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">openssl</span>
+<span class="n">req</span><span class="p">:</span> <span class="n">No</span> <span class="n">value</span> <span class="n">provided</span> <span class="k">for</span> <span class="n">subject</span> <span class="n">name</span> <span class="n">attribute</span> <span class="s2">&quot;emailAddress&quot;</span><span class="p">,</span> <span class="n">skipped</span>
+<span class="n">Certificate</span> <span class="n">request</span> <span class="bp">self</span><span class="o">-</span><span class="n">signature</span> <span class="n">ok</span>
+<span class="n">subject</span><span class="o">=</span><span class="n">C</span> <span class="o">=</span> <span class="n">PS</span><span class="p">,</span> <span class="n">ST</span> <span class="o">=</span> <span class="n">Proxy</span> <span class="n">Environment</span><span class="p">,</span> <span class="n">L</span> <span class="o">=</span> <span class="n">Proxy</span><span class="p">,</span> <span class="n">O</span> <span class="o">=</span> <span class="n">Docker</span> <span class="n">Proxy</span> <span class="n">Stack</span><span class="p">,</span> <span class="n">OU</span> <span class="o">=</span> <span class="n">Docker</span> <span class="n">Proxy</span> <span class="n">Stack</span><span class="p">,</span> <span class="n">CN</span> <span class="o">=</span> <span class="n">second</span><span class="o">.</span><span class="n">docker</span><span class="o">.</span><span class="n">test</span>
+<span class="n">Done</span> <span class="n">creating</span> <span class="n">rootCA</span> <span class="ow">and</span> <span class="n">certificates</span> <span class="ow">in</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">patrick</span><span class="o">/</span><span class="n">Dokumente</span><span class="o">/</span><span class="n">docker</span><span class="o">-</span><span class="n">proxy</span><span class="o">-</span><span class="n">stack</span><span class="o">/</span><span class="n">certs</span><span class="o">.</span>
+<span class="n">Now</span> <span class="n">register</span> <span class="n">the</span> <span class="n">rootCA</span><span class="o">.</span><span class="n">crt</span> <span class="ow">in</span> <span class="n">your</span> <span class="n">browser</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Don’t forget to check <a class="reference internal" href="install.html#docs-docker-proxy-chromium-install"><span class="std std-ref">Install the rootCA to Chrome or Chromium</span></a> or <a class="reference internal" href="install.html#docs-docker-proxy-firefox-install"><span class="std std-ref">Install the rootCA to Firefox</span></a>
+for instructions on how to install the new certificate.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="upgrade-v2.html" class="btn btn-neutral float-left" title="Docker-Proxy-Stack Upgrade instructions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="spawn-examples.html" class="btn btn-neutral float-right" title="Spawn Container Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Sengorius.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

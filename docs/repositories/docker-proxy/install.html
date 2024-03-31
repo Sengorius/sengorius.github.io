@@ -64,6 +64,7 @@
 <li class="toctree-l2"><a class="reference internal" href="docker-exec.html">DockerExec</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mailcatching.html">E-Mail Catching</a></li>
 <li class="toctree-l2"><a class="reference internal" href="upgrade-v2.html">Docker-Proxy-Stack Upgrade instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multilevel-cert.html">Creating multilevel subdomain certificates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spawn-examples.html">Spawn Container Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#what-is-the-docker-proxy-stack">What is the Docker-Proxy-Stack?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#how-does-the-proxy-stack-work">How does the Proxy-Stack work?</a></li>
@@ -132,13 +133,13 @@ to get that library. With Homebrew installed, use <code class="docutils literal 
 <p>Read further on <a class="reference external" href="https://brew.sh/">how to install Homebrew</a>.</p>
 </section>
 <section id="install-the-rootca-to-firefox">
-<h3>Install the rootCA to Firefox<a class="headerlink" href="#install-the-rootca-to-firefox" title="Link to this heading"></a></h3>
+<span id="docs-docker-proxy-firefox-install"></span><h3>Install the rootCA to Firefox<a class="headerlink" href="#install-the-rootca-to-firefox" title="Link to this heading"></a></h3>
 <p>Go to <code class="docutils literal notranslate"><span class="pre">Settings</span> <span class="pre">-&gt;</span> <span class="pre">Security</span></code> and scroll to the bottom, then click <code class="docutils literal notranslate"><span class="pre">Show</span> <span class="pre">Certificates</span></code>. In the tab
 <code class="docutils literal notranslate"><span class="pre">certificate</span> <span class="pre">authorities</span></code> click <code class="docutils literal notranslate"><span class="pre">import</span></code>, navigate to the aforementioned <code class="docutils literal notranslate"><span class="pre">/certs</span></code> folder and select <code class="docutils literal notranslate"><span class="pre">rootCA.crt</span></code>
 to import. Select both checkboxes and confirm.</p>
 </section>
 <section id="install-the-rootca-to-chrome-or-chromium">
-<h3>Install the rootCA to Chrome or Chromium<a class="headerlink" href="#install-the-rootca-to-chrome-or-chromium" title="Link to this heading"></a></h3>
+<span id="docs-docker-proxy-chromium-install"></span><h3>Install the rootCA to Chrome or Chromium<a class="headerlink" href="#install-the-rootca-to-chrome-or-chromium" title="Link to this heading"></a></h3>
 <p>In <code class="docutils literal notranslate"><span class="pre">Settings</span> <span class="pre">-&gt;</span> <span class="pre">Manage</span> <span class="pre">certificates</span> <span class="pre">-&gt;</span> <span class="pre">Authorities</span></code>. Navigate to the aforementioned <code class="docutils literal notranslate"><span class="pre">/certs</span></code> folder and select
 <code class="docutils literal notranslate"><span class="pre">rootCA.crt</span></code> to import.</p>
 <p>This also works for Opera or Vivaldi browsers.</p>
