@@ -46,6 +46,8 @@ to get that library. With Homebrew installed, use ``brew install coreutils``.
 Read further on `how to install Homebrew <https://brew.sh/>`_.
 
 
+.. _docs_docker-proxy_firefox-install:
+
 Install the rootCA to Firefox
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -53,6 +55,8 @@ Go to ``Settings -> Security`` and scroll to the bottom, then click ``Show Certi
 ``certificate authorities`` click ``import``, navigate to the aforementioned ``/certs`` folder and select ``rootCA.crt``
 to import. Select both checkboxes and confirm.
 
+
+.. _docs_docker-proxy_chromium-install:
 
 Install the rootCA to Chrome or Chromium
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
